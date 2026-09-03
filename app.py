@@ -218,21 +218,21 @@ with col2:
         unsafe_allow_html=True
     )
 
-    st.markdown(
-        "<div class='mecanica-box'>",
-        unsafe_allow_html=True
+    itens_mecanica = ""
+
+for _, row in mecanica.iterrows():
+    itens_mecanica += f"<li>{row['Texto']}</li>"
+
+st.markdown(
+    f"""
+    <div class='mecanica-box'>
+        <ul>
+            {itens_mecanica}
+        </ul>
+    </div>
+    """,
+    unsafe_allow_html=True
     )
-
-    for _, row in mecanica.iterrows():
-        st.markdown(
-            f"• {row['Texto']}"
-        )
-
-    st.markdown(
-        "</div>",
-        unsafe_allow_html=True
-    )
-
 # ==================================================
 # CARDS PRODUTOS
 # ==================================================

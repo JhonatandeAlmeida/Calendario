@@ -4,9 +4,9 @@ import pandas as pd
 from components.calendar import gerar_calendario
 from components.styles import load_css
 
-# ==================================================
-# CONFIGURAÇÃO
-# ==================================================
+# ======================================================
+# CONFIGURAÇÃO DA PÁGINA
+# ======================================================
 
 st.set_page_config(
     page_title="Calendário Promocional",
@@ -16,9 +16,9 @@ st.set_page_config(
 
 load_css()
 
-# ==================================================
-# LEITURA DO EXCEL
-# ==================================================
+# ======================================================
+# LEITURA DO ARQUIVO EXCEL
+# ======================================================
 
 ARQUIVO = "data/calendario_promocional.xlsx"
 
@@ -42,9 +42,9 @@ prod_df = pd.read_excel(
     sheet_name="PRODUTOS"
 )
 
-# ==================================================
+# ======================================================
 # CONFIGURAÇÕES
-# ==================================================
+# ======================================================
 
 config = dict(
     zip(
@@ -80,16 +80,24 @@ ano = int(
     )
 )
 
-# ==================================================
+# ======================================================
 # FILTROS
-# ==================================================
+# ======================================================
 
 meses = sorted(
-    prod_df["Mes"].dropna().unique().tolist()
+    prod_df["Mes"]
+    .dropna()
+    .astype(str)
+    .unique()
+    .tolist()
 )
 
 regionais = sorted(
-    prod_df["Regional"].dropna().unique().tolist()
+    prod_df["Regional"]
+    .dropna()
+    .astype(str)
+    .unique()
+    .tolist()
 )
 
 mes_index = (
@@ -120,29 +128,28 @@ with col_f2:
         index=regional_index
     )
 
-# ==================================================
-# FILTRAGEM
-# ==================================================
+# ======================================================
+# FILTRAGEM DOS DADOS
+# ======================================================
 
 produtos = prod_df[
-    (prod_df["Mes"] == mes)
-    &
-    (prod_df["Regional"] == regional)
+    (prod_df["Mes"].astype(str) == mes) &
+    (prod_df["Regional"].astype(str) == regional)
 ]
 
 mecanica = mec_df[
-    mec_df["Regional"] == regional
+    mec_df["Regional"].astype(str) == regional
 ]
 
-# ==================================================
+# ======================================================
 # CALENDÁRIO
-# ==================================================
+# ======================================================
 
 cal_df["Data"] = pd.to_datetime(
     cal_df["Data"]
 )
 
-mes_numero = {
+meses_numericos = {
     "Janeiro": 1,
     "Fevereiro": 2,
     "Março": 3,
@@ -155,11 +162,12 @@ mes_numero = {
     "Outubro": 10,
     "Novembro": 11,
     "Dezembro": 12
-}.get(mes)
+}
+
+mes_numero = meses_numericos.get(mes)
 
 cal_mes = cal_df[
-    (cal_df["Data"].dt.month == mes_numero)
-    &
+    (cal_df["Data"].dt.month == mes_numero) &
     (cal_df["Data"].dt.year == ano)
 ]
 
@@ -168,13 +176,13 @@ eventos = {}
 for _, row in cal_mes.iterrows():
     eventos[row["Data"].day] = row["Tipo"]
 
-# ==================================================
+# ======================================================
 # CABEÇALHO
-# ==================================================
+# ======================================================
 
-col_title, col_logo = st.columns([8, 1])
+col_titulo, col_logo = st.columns([8, 1])
 
-with col_title:
+with col_titulo:
 
     st.markdown(
         f"""
@@ -195,16 +203,20 @@ with col_logo:
     except:
         pass
 
-# ==================================================
-# CALENDÁRIO + MECÂNICA
-# ==================================================
+# ======================================================
+# CALENDÁRIO E MECÂNICA
+# ======================================================
 
-col1, col2 = st.columns([1.05, 1.25])
+col1, col2 = st.columns([1, 1])
 
 with col1:
 
     st.markdown(
-        "<div class='section-title'>Calendário</div>",
+        """
+        <div class='section-title'>
+            Calendário
+        </div>
+        """,
         unsafe_allow_html=True
     )
 
@@ -217,38 +229,45 @@ with col1:
 with col2:
 
     st.markdown(
-        "<div class='section-title'>Mecânica</div>",
+        """
+        <div class='section-title'>
+            Mecânica
+        </div>
+        """,
         unsafe_allow_html=True
     )
 
-    itens_mecanica = ""
+    itens = ""
 
     for _, row in mecanica.iterrows():
-        itens_mecanica += f"<li>{row['Texto']}</li>"
+        itens += f"<li>{row['Texto']}</li>"
 
     st.markdown(
         f"""
         <div class='mecanica-box'>
             <ul>
-                {itens_mecanica}
+                {itens}
             </ul>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-# ==================================================
-# CARDS PRODUTOS
-# ==================================================
+# ======================================================
+# PRODUTOS
+# ======================================================
 
-def mostrar_canal(df, canal):
+def mostrar_canal(df_canal, nome_canal):
+
+    if len(df_canal) == 0:
+        return
 
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown(
         f"""
         <div class='canal-title'>
-            {canal}
+            {nome_canal}
         </div>
         """,
         unsafe_allow_html=True
@@ -256,11 +275,11 @@ def mostrar_canal(df, canal):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    cols = st.columns(8)
+    colunas = st.columns(6)
 
-    for i, (_, row) in enumerate(df.iterrows()):
+    for i, (_, row) in enumerate(df_canal.iterrows()):
 
-        with cols[i % 8]:
+        with colunas[i % 6]:
 
             try:
                 st.image(
@@ -268,7 +287,10 @@ def mostrar_canal(df, canal):
                     use_container_width=True
                 )
             except:
-                st.empty()
+                st.image(
+                    "https://placehold.co/200x200?text=SKU",
+                    use_container_width=True
+                )
 
             st.markdown(
                 f"""
@@ -297,17 +319,15 @@ def mostrar_canal(df, canal):
                 unsafe_allow_html=True
             )
 
-# ==================================================
-# EXIBIÇÃO DOS CANAIS
-# ==================================================
+# ======================================================
+# EXIBE TODOS OS CANAIS
+# ======================================================
 
-for canal in produtos["Canal"].unique():
-
-    df_canal = produtos[
-        produtos["Canal"] == canal
-    ]
+for canal in produtos["Canal"].dropna().unique():
 
     mostrar_canal(
-        df_canal,
+        produtos[
+            produtos["Canal"] == canal
+        ],
         canal
     )

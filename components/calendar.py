@@ -1,17 +1,22 @@
 import calendar
-from datetime import datetime
-import pandas as pd
 import streamlit as st
 
 
-def gerar_calendario(ano, mes, eventos=None):
+def gerar_calendario(
+    ano,
+    mes,
+    eventos=None
+):
 
     if eventos is None:
         eventos = {}
 
-    cal = calendar.monthcalendar(ano, mes)
+    cal = calendar.monthcalendar(
+        ano,
+        mes
+    )
 
-    dias_semana = [
+    dias = [
         "DOM",
         "SEG",
         "TER",
@@ -22,15 +27,20 @@ def gerar_calendario(ano, mes, eventos=None):
     ]
 
     html = """
-    <table style='width:100%;border-collapse:collapse;text-align:center'>
+    <table style='width:100%; text-align:center; border-collapse:collapse'>
     """
 
     html += "<tr>"
 
-    for dia in dias_semana:
+    for dia in dias:
+
         html += f"""
-        <th style='padding:5px;background:#EFEFEF'>
-        {dia}
+        <th style="
+            background:#EFEFEF;
+            padding:8px;
+            border:1px solid white;
+        ">
+            {dia}
         </th>
         """
 
@@ -43,7 +53,10 @@ def gerar_calendario(ano, mes, eventos=None):
         for dia in semana:
 
             if dia == 0:
-                html += "<td></td>"
+
+                html += """
+                <td style='padding:12px'></td>
+                """
 
             else:
 
@@ -54,17 +67,16 @@ def gerar_calendario(ano, mes, eventos=None):
                     if eventos[dia] == "Sell In":
                         cor = "#FCE4D6"
 
-                    if eventos[dia] == "Sell Out":
+                    elif eventos[dia] == "Sell Out":
                         cor = "#FFF2CC"
 
                 html += f"""
-                <td
-                style='
+                <td style="
                     background:{cor};
-                    padding:10px;
+                    padding:12px;
                     border:1px solid white;
                     font-weight:bold;
-                '>
+                ">
                     {dia}
                 </td>
                 """
@@ -73,4 +85,7 @@ def gerar_calendario(ano, mes, eventos=None):
 
     html += "</table>"
 
-    st.markdown(html, unsafe_allow_html=True)
+    st.markdown(
+        html,
+        unsafe_allow_html=True
+    )

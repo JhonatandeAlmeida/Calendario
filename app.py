@@ -245,22 +245,21 @@ with col2:
         unsafe_allow_html=True
     )
 
-    lista_mecanica = ""
+    lista_itens = ""
 
     for _, row in mecanica.iterrows():
+        lista_itens += f"<li>{row['Texto']}</li>"
 
-        lista_mecanica += f"""
-        <li>{row['Texto']}</li>
-        """
+    html_mecanica = f"""
+    <div class='mecanica-box'>
+        <ul>
+            {lista_itens}
+        </ul>
+    </div>
+    """
 
     st.markdown(
-        f"""
-        <div class='mecanica-box'>
-            <ul>
-                {lista_mecanica}
-            </ul>
-        </div>
-        """,
+        html_mecanica,
         unsafe_allow_html=True
     )
 

@@ -29,32 +29,44 @@ def load_css():
         border:1px solid #CFCFCF;
         border-radius:5px;
         padding:15px;
-        min-height:220px;
+        min-height:200px;
         color:black;
     }
 
     .canal-title{
-        width:220px;
-        margin:auto;
+        background:#6E6E6E;
+        color:white;
         text-align:center;
-        background:white;
-        color:black;
-        padding:8px;
-        font-size:24px;
+        font-size:26px;
         font-weight:bold;
-        border-radius:10px;
-        box-shadow:0px 2px 5px rgba(0,0,0,0.2);
+        border-radius:5px;
+        padding:10px;
+        margin-top:20px;
+        margin-bottom:15px;
+    }
+
+    .quinzena-title{
+        background:#E8E8E8;
+        color:black;
+        text-align:center;
+        font-size:18px;
+        font-weight:bold;
+        border-radius:5px;
+        padding:8px;
+        margin-top:10px;
+        margin-bottom:15px;
     }
 
     .sku-name{
         text-align:center;
-        color:black;
+        font-size:13px;
         font-weight:bold;
         min-height:40px;
+        color:black;
     }
 
     .old-price{
-        background:#686868;
+        background:#6E6E6E;
         color:white;
         text-align:center;
         padding:5px;
@@ -63,7 +75,7 @@ def load_css():
     }
 
     .new-price{
-        background:#B5B5B5;
+        background:#B3B3B3;
         color:white;
         text-align:center;
         padding:5px;

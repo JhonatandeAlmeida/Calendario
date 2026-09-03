@@ -2,21 +2,17 @@ import calendar
 import streamlit as st
 
 
-def gerar_calendario(
-    ano,
-    mes,
-    eventos=None
-):
+def gerar_calendario(ano, mes, eventos=None):
 
     if eventos is None:
         eventos = {}
 
-    cal = calendar.monthcalendar(
-        ano,
-        mes
-    )
+    # Semana começa no domingo
+    calendar.setfirstweekday(calendar.SUNDAY)
 
-    dias = [
+    cal = calendar.monthcalendar(ano, mes)
+
+    dias_semana = [
         "DOM",
         "SEG",
         "TER",
@@ -27,18 +23,25 @@ def gerar_calendario(
     ]
 
     html = """
-    <table style='width:100%; text-align:center; border-collapse:collapse'>
+    <table style="
+        width:100%;
+        border-collapse:collapse;
+        text-align:center;
+        font-family:Arial;
+    ">
     """
 
+    # Cabeçalho
     html += "<tr>"
 
-    for dia in dias:
+    for dia in dias_semana:
 
         html += f"""
         <th style="
-            background:#EFEFEF;
+            background:#E6E6E6;
             padding:8px;
             border:1px solid white;
+            font-size:14px;
         ">
             {dia}
         </th>
@@ -46,6 +49,7 @@ def gerar_calendario(
 
     html += "</tr>"
 
+    # Dias do mês
     for semana in cal:
 
         html += "<tr>"
@@ -55,11 +59,16 @@ def gerar_calendario(
             if dia == 0:
 
                 html += """
-                <td style='padding:12px'></td>
+                <td style="
+                    height:40px;
+                    border:1px solid white;
+                ">
+                </td>
                 """
 
             else:
 
+                # Cor padrão
                 cor = "#DCE6F1"
 
                 if dia in eventos:
@@ -73,9 +82,10 @@ def gerar_calendario(
                 html += f"""
                 <td style="
                     background:{cor};
-                    padding:12px;
+                    height:40px;
                     border:1px solid white;
                     font-weight:bold;
+                    font-size:15px;
                 ">
                     {dia}
                 </td>

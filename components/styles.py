@@ -25,11 +25,13 @@ def load_css():
     }
 
     .mecanica-box{
-        background:white;
-        border:1px solid #D9D9D9;
-        padding:15px;
-        border-radius:5px;
-        min-height:240px;
+    background:white;
+    border:1px solid #CFCFCF;
+    border-radius:5px;
+    padding:15px;
+    min-height:200px;
+    color:black;
+    font-size:16px;
     }
 
     .canal-title{

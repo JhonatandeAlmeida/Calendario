@@ -58,10 +58,10 @@ def gerar_calendario(ano, mes, eventos=None):
 
                 if dia in eventos:
 
-                    if eventos[dia] == "Sell In":
+                    if eventos[dia] == "1ª QUINZ":
                         cor = "#F4B183"  # laranja
 
-                    elif eventos[dia] == "Sell Out":
+                    elif eventos[dia] == "2ª QUINZ":
                         cor = "#FFD966"  # amarelo
 
   

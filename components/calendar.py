@@ -1,5 +1,4 @@
 import calendar
-import pandas as pd
 import streamlit as st
 
 
@@ -12,50 +11,57 @@ def gerar_calendario(ano, mes, eventos=None):
 
     semanas = calendar.monthcalendar(ano, mes)
 
-    linhas = []
+    html = """
+    <table style="
+        width:100%;
+        border-collapse:collapse;
+        text-align:center;
+        font-family:Arial;
+        font-size:14px;
+    ">
+    """
 
+    # Cabeçalho
+    html += """
+    <tr>
+        <th style="padding:10px;border:1px solid #D9D9D9;">DOM</th>
+        <th style="padding:10px;border:1px solid #D9D9D9;">SEG</th>
+        <th style="padding:10px;border:1px solid #D9D9D9;">TER</th>
+        <th style="padding:10px;border:1px solid #D9D9D9;">QUA</th>
+        <th style="padding:10px;border:1px solid #D9D9D9;">QUI</th>
+        <th style="padding:10px;border:1px solid #D9D9D9;">SEX</th>
+        <th style="padding:10px;border:1px solid #D9D9D9;">SAB</th>
+    </tr>
+    """
+
+    # Dias
     for semana in semanas:
 
-        linha = []
+        html += "<tr>"
 
         for dia in semana:
 
             if dia == 0:
-                linha.append("")
+
+                html += """
+                <td style="
+                    height:55px;
+                    border:1px solid #D9D9D9;
+                    background:white;
+                ">
+                </td>
+                """
+
             else:
+
+                cor = "#FFFFFF"
 
                 if dia in eventos:
 
-                    if eventos[dia] == "1ª QUINZ":
-                        linha.append(f"🟧 {dia}")
+                    if eventos[dia] == "Sell In":
+                        cor = "#F4B183"  # laranja
 
-                    elif eventos[dia] == "2ª QUINZ":
-                        linha.append(f"🟨 {dia}")
+                    elif eventos[dia] == "Sell Out":
+                        cor = "#FFD966"  # amarelo
 
-                    else:
-                        linha.append(str(dia))
-
-                else:
-                    linha.append(str(dia))
-
-        linhas.append(linha)
-
-    df = pd.DataFrame(
-        linhas,
-        columns=[
-            "DOM",
-            "SEG",
-            "TER",
-            "QUA",
-            "QUI",
-            "SEX",
-            "SAB"
-        ]
-    )
-
-    st.table(df)
-
-    st.markdown("""
-    🟧 1ª QUINZ &nbsp;&nbsp;&nbsp;&nbsp;
-    🟨 2ª QUINZ
-    """)
+  

@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def load_css():
 
     st.markdown("""
@@ -7,78 +8,68 @@ def load_css():
 
     .main-title{
         font-size:42px;
-        font-weight:bold;
+        font-weight:700;
         color:#0066B3;
         margin-bottom:20px;
     }
 
-    .month-title{
-        color:black;
-        font-size:36px;
-    }
-
     .section-title{
-        background:#737373;
+        background:#6E6E6E;
         color:white;
         text-align:center;
-        border-radius:5px;
-        padding:8px;
-        font-size:28px;
+        font-size:24px;
         font-weight:bold;
-        margin-bottom:10px;
+        border-radius:4px;
+        padding:8px;
+        margin-bottom:5px;
     }
 
-    .card-container{
-        background:#EEF1F5;
-        border-radius:20px;
-        padding:20px;
-        box-shadow:0px 2px 8px rgba(0,0,0,0.15);
-        margin-bottom:15px;
+    .mecanica-box{
+        background:white;
+        border:1px solid #D9D9D9;
+        padding:15px;
+        border-radius:5px;
+        min-height:240px;
+    }
+
+    .canal-title{
+        width:200px;
+        margin:auto;
+        text-align:center;
+        background:white;
+        padding:8px;
+        font-size:26px;
+        font-weight:bold;
+        border-radius:10px;
+        box-shadow:0px 2px 8px rgba(0,0,0,.20);
     }
 
     .sku-name{
         text-align:center;
-        font-weight:bold;
         font-size:14px;
+        font-weight:bold;
         margin-top:5px;
+        min-height:40px;
     }
 
     .old-price{
-        background:#7F7F7F;
+        background:#7C7C7C;
         color:white;
-        border-radius:18px;
         text-align:center;
-        padding:4px;
+        padding:5px;
+        border-radius:20px;
         margin-top:5px;
     }
 
     .new-price{
-        background:#BBBBBB;
+        background:#B9B9B9;
         color:white;
-        border-radius:18px;
         text-align:center;
-        padding:4px;
+        padding:5px;
+        border-radius:20px;
         margin-top:5px;
     }
 
-    .canal-title{
-        text-align:center;
-        font-weight:bold;
-        font-size:24px;
-        background:white;
-        border-radius:8px;
-        padding:5px 15px;
-        width:180px;
-        margin:auto;
-        box-shadow:0px 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .mecanica-box{
-        border:1px solid #D0D0D0;
-        padding:20px;
-        border-radius:5px;
-        background:white;
-    }
-
     </style>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True)

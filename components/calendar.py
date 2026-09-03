@@ -56,6 +56,6 @@ def gerar_calendario(ano, mes, eventos=None):
     st.table(df)
 
     st.markdown("""
-    🟧 Sell In &nbsp;&nbsp;&nbsp;&nbsp;
-    🟨 Sell Out
+    🟧 1ª QUINZ &nbsp;&nbsp;&nbsp;&nbsp;
+    🟨 2ª QUINZ
     """)

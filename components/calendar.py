@@ -25,10 +25,10 @@ def gerar_calendario(ano, mes, eventos=None):
 
             elif dia in eventos:
 
-                if eventos[dia] == "1ª QUINZ":
+                if eventos[dia] == "Sell In":
                     linha.append(f"🟧 {dia}")
 
-                elif eventos[dia] == "2ª QUINZ":
+                elif eventos[dia] == "Sell Out":
                     linha.append(f"🟨 {dia}")
 
                 else:
@@ -52,8 +52,9 @@ def gerar_calendario(ano, mes, eventos=None):
         ]
     )
 
-    st.dataframe(
-        df,
-        hide_index=True,
-        use_container_width=True
-    )
+    st.table(df)
+
+    st.markdown("""
+    🟧 1ª QUINZENA &nbsp;&nbsp;&nbsp;&nbsp;
+    🟨 2ª QUINZENA
+    """)

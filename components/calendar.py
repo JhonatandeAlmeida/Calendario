@@ -25,10 +25,10 @@ def gerar_calendario(ano, mes, eventos=None):
 
             elif dia in eventos:
 
-                if eventos[dia] == "Sell In":
+                if eventos[dia] == "1ª QUINZ":
                     linha.append(f"🟧 {dia}")
 
-                elif eventos[dia] == "Sell Out":
+                elif eventos[dia] == "2ª QUINZ":
                     linha.append(f"🟨 {dia}")
 
                 else:

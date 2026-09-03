@@ -1,4 +1,5 @@
 import calendar
+import pandas as pd
 import streamlit as st
 
 
@@ -11,57 +12,48 @@ def gerar_calendario(ano, mes, eventos=None):
 
     semanas = calendar.monthcalendar(ano, mes)
 
-    html = """
-    <table style="
-        width:100%;
-        border-collapse:collapse;
-        text-align:center;
-        font-family:Arial;
-        font-size:14px;
-    ">
-    """
+    dados = []
 
-    # Cabeçalho
-    html += """
-    <tr>
-        <th style="padding:10px;border:1px solid #D9D9D9;">DOM</th>
-        <th style="padding:10px;border:1px solid #D9D9D9;">SEG</th>
-        <th style="padding:10px;border:1px solid #D9D9D9;">TER</th>
-        <th style="padding:10px;border:1px solid #D9D9D9;">QUA</th>
-        <th style="padding:10px;border:1px solid #D9D9D9;">QUI</th>
-        <th style="padding:10px;border:1px solid #D9D9D9;">SEX</th>
-        <th style="padding:10px;border:1px solid #D9D9D9;">SAB</th>
-    </tr>
-    """
-
-    # Dias
     for semana in semanas:
 
-        html += "<tr>"
+        linha = []
 
         for dia in semana:
 
             if dia == 0:
+                linha.append("")
 
-                html += """
-                <td style="
-                    height:55px;
-                    border:1px solid #D9D9D9;
-                    background:white;
-                ">
-                </td>
-                """
+            elif dia in eventos:
+
+                if eventos[dia] == "1ª QUINZ":
+                    linha.append(f"🟧 {dia}")
+
+                elif eventos[dia] == "2ª QUINZ":
+                    linha.append(f"🟨 {dia}")
+
+                else:
+                    linha.append(str(dia))
 
             else:
+                linha.append(str(dia))
 
-                cor = "#FFFFFF"
+        dados.append(linha)
 
-                if dia in eventos:
+    df = pd.DataFrame(
+        dados,
+        columns=[
+            "DOM",
+            "SEG",
+            "TER",
+            "QUA",
+            "QUI",
+            "SEX",
+            "SAB"
+        ]
+    )
 
-                    if eventos[dia] == "1ª QUINZ":
-                        cor = "#F4B183"  # laranja
-
-                    elif eventos[dia] == "2ª QUINZ":
-                        cor = "#FFD966"  # amarelo
-
-  
+    st.dataframe(
+        df,
+        hide_index=True,
+        use_container_width=True
+    )

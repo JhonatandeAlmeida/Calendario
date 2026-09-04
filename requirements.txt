@@ -4,5 +4,3 @@ openpyxl
 streamlit-calendar
 Pillow
 reportlab
-requests
-msal

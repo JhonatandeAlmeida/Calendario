@@ -344,10 +344,13 @@ def mostrar_produtos(df_canal, canal):
 
                 try:
 
-                    st.image(
-                        f"images/produtos/{row['Imagem']}",
-                        width=85
-                    )
+                    c1,c2,c3 = st.columns([1,2,1])
+                    
+                    with c2:
+                        st.image(
+                            f"images/produtos/{row['Imagem']}",
+                            width=85
+                        )
 
                 except Exception:
                     st.empty()
@@ -356,7 +359,6 @@ def mostrar_produtos(df_canal, canal):
                     f"""
                     <div style="
                         text-align:center;
-                        border:1px solid red;
                         width:100%;
                         font-weight:bold;
                         margin-top:8px;

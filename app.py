@@ -1,9 +1,197 @@
 import streamlit as st
 import pandas as pd
-
+ 
+from io import BytesIO
+ 
+from reportlab.lib import colors
+from reportlab.lib.units import cm
+from reportlab.platypus import (
+SimpleDocTemplate,
+Paragraph,
+Spacer,
+Image,
+Table,
+TableStyle
+)
+from reportlab.lib.styles import getSampleStyleSheet
+ 
 from components.calendar import gerar_calendario
 from components.styles import load_css
 
+# ==================================================
+# FUNÇÃO PDF
+# ==================================================
+ 
+def gerar_pdf(
+    titulo,
+    mes,
+    ano,
+    mecanica_mes,
+    produtos,
+    logo
+):
+
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(buffer)
+
+    styles = getSampleStyleSheet()
+
+    elementos = []
+
+    # Título
+
+    elementos.append(
+        Paragraph(
+            f"<b>{titulo} | {mes} {ano}</b>",
+            styles["Title"]
+        )
+    )
+
+    elementos.append(Spacer(1, 10))
+
+    # Logo
+
+    try:
+
+        elementos.append(
+            Image(
+                f"images/{logo}",
+                width=3*cm,
+                height=3*cm
+            )
+        )
+
+    except:
+        pass
+
+    elementos.append(Spacer(1, 10))
+
+    # Mecânica
+
+    elementos.append(
+        Paragraph(
+            "<b>MECÂNICA</b>",
+            styles["Heading2"]
+        )
+    )
+
+    sell_in = mecanica_mes[
+        mecanica_mes["Tipo"].str.upper()
+        == "SELL IN"
+    ]
+
+    sell_out = mecanica_mes[
+        mecanica_mes["Tipo"].str.upper()
+        == "SELL OUT"
+    ]
+
+    elementos.append(
+        Paragraph(
+            "<b>SELL IN</b>",
+            styles["Heading3"]
+        )
+    )
+
+    for _, row in sell_in.iterrows():
+
+        elementos.append(
+            Paragraph(
+                f"• {row['Texto']}",
+                styles["BodyText"]
+            )
+        )
+
+    elementos.append(Spacer(1, 10))
+
+    elementos.append(
+        Paragraph(
+            "<b>SELL OUT</b>",
+            styles["Heading3"]
+        )
+    )
+
+    for _, row in sell_out.iterrows():
+
+        elementos.append(
+            Paragraph(
+                f"• {row['Texto']}",
+                styles["BodyText"]
+            )
+        )
+
+    elementos.append(Spacer(1, 20))
+
+    # Produtos
+
+    for canal in produtos["Canal"].dropna().unique():
+
+        elementos.append(
+            Paragraph(
+                f"<b>{canal}</b>",
+                styles["Heading2"]
+            )
+        )
+
+        df_canal = produtos[
+            produtos["Canal"] == canal
+        ]
+
+        for quinzena in sorted(
+            df_canal["Quinzena"].unique()
+        ):
+
+            elementos.append(
+                Paragraph(
+                    f"<b>{quinzena}ª QUINZENA</b>",
+                    styles["Heading3"]
+                )
+            )
+
+            dados = [
+                [
+                    "SKU",
+                    "DE",
+                    "PARA"
+                ]
+            ]
+
+            produtos_q = df_canal[
+                df_canal["Quinzena"] == quinzena
+            ]
+
+            for _, row in produtos_q.iterrows():
+
+                dados.append(
+                    [
+                        str(row["SKU"]),
+                        f"R$ {row['De']:.2f}",
+                        f"R$ {row['Para']:.2f}"
+                    ]
+                )
+
+            tabela = Table(
+                dados,
+                colWidths=[6*cm, 3*cm, 3*cm]
+            )
+
+            tabela.setStyle(
+                TableStyle([
+                    ("BACKGROUND", (0,0), (-1,0), colors.grey),
+                    ("TEXTCOLOR", (0,0), (-1,0), colors.white),
+                    ("GRID", (0,0), (-1,-1), 1, colors.black),
+                    ("ALIGN", (0,0), (-1,-1), "CENTER"),
+                ])
+            )
+
+            elementos.append(tabela)
+            elementos.append(Spacer(1, 10))
+
+    doc.build(elementos)
+
+    buffer.seek(0)
+
+    return buffer
 # ==================================================
 # CONFIGURAÇÃO
 # ==================================================
@@ -410,3 +598,18 @@ else:
             df_canal,
             canal
         )
+pdf_file = gerar_pdf(
+    titulo=titulo,
+    mes=mes,
+    ano=ano,
+    mecanica_mes=mecanica_mes,
+    produtos=produtos,
+    logo=logo
+)
+
+st.download_button(
+    "📄 Exportar PDF",
+    data=pdf_file,
+    file_name=f"Calendario_{mes}_{ano}.pdf",
+    mime="application/pdf"
+)

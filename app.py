@@ -342,16 +342,16 @@ def mostrar_produtos(df_canal, canal):
             produtos_q.iterrows()
         ):
 
-            with cols[i % 6]:
+        with cols[i % 6]:
 
-                try:
-                    c1, c2, c3 = st.columns([1, 2, 1])
+            try:
+                c1, c2, c3 = st.columns([1, 2, 1])
 
-                with c2:
-                    st.image(
-                        f"images/produtos/{row['Imagem']}",
-                        width=85
-                    )
+            with c2:
+                st.image(
+                    f"images/produtos/{row['Imagem']}",
+                    width=85
+                )
 
                 except Exception:
                     st.empty()

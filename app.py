@@ -91,22 +91,19 @@ logo = config.get(
 # FILTROS
 # =====================================================
 
-meses = (
+meses = sorted(
     prod_df["Mes"]
     .dropna()
     .astype(str)
     .unique()
 )
 
-regionais = (
+regionais = sorted(
     prod_df["Regional"]
     .dropna()
     .astype(str)
     .unique()
 )
-
-meses = sorted(meses)
-regionais = sorted(regionais)
 
 col_f1, col_f2 = st.columns(2)
 
@@ -129,7 +126,7 @@ with col_f2:
     )
 
 # =====================================================
-# FILTROS DE DADOS
+# FILTROS DOS DADOS
 # =====================================================
 
 produtos = prod_df[
@@ -138,8 +135,13 @@ produtos = prod_df[
     (prod_df["Regional"].astype(str) == regional)
 ]
 
-mecanica = mec_df[
-    mec_df["Mes"].astype(str) == mes
+mecanica_mes = mec_df[
+    mec_df["Mes"]
+    .astype(str)
+    .str.strip()
+    .str.upper()
+    ==
+    mes.strip().upper()
 ]
 
 # =====================================================
@@ -150,7 +152,7 @@ cal_df["Data"] = pd.to_datetime(
     cal_df["Data"]
 )
 
-meses_numero = {
+mapa_meses = {
     "Janeiro": 1,
     "Fevereiro": 2,
     "Março": 3,
@@ -165,7 +167,7 @@ meses_numero = {
     "Dezembro": 12
 }
 
-mes_numero = meses_numero.get(
+mes_numero = mapa_meses.get(
     mes,
     9
 )
@@ -194,7 +196,7 @@ with col_title:
 
     st.markdown(
         f"""
-        <div class='main-title'>
+        <div class="main-title">
             {titulo} | {mes} {ano}
         </div>
         """,
@@ -204,10 +206,12 @@ with col_title:
 with col_logo:
 
     try:
+
         st.image(
             f"images/{logo}",
             width=100
         )
+
     except:
         pass
 
@@ -221,7 +225,7 @@ with col1:
 
     st.markdown(
         """
-        <div class='section-title'>
+        <div class="section-title">
             Calendário
         </div>
         """,
@@ -238,28 +242,32 @@ with col2:
 
     st.markdown(
         """
-        <div class='section-title'>
+        <div class="section-title">
             Mecânica
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    mecanica_mes = mec_df[
-        mec_df["Mes"].astype(str) == mes
-    ]
-
     sell_in = mecanica_mes[
-        mecanica_mes["Tipo"] == "Sell In"
+        mecanica_mes["Tipo"]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+        == "SELL IN"
     ]
 
     sell_out = mecanica_mes[
-        mecanica_mes["Tipo"] == "Sell Out"
+        mecanica_mes["Tipo"]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+        == "SELL OUT"
     ]
 
     html = "<div class='mecanica-box'>"
 
-    if len(sell_in) > 0:
+    if not sell_in.empty:
 
         html += """
         <div class='mecanica-subtitle'>
@@ -273,127 +281,9 @@ with col2:
 
         html += "</ul>"
 
-    if len(sell_out) > 0:
+    if not sell_out.empty:
 
         html += """
         <div class='mecanica-subtitle'>
             SELL OUT
-        </div>
-        <ul class='mecanica-lista'>
-        """
-
-        for _, row in sell_out.iterrows():
-            html += f"<li>{row['Texto']}</li>"
-
-        html += "</ul>"
-
-    html += "</div>"
-
-    st.markdown(
-        html,
-        unsafe_allow_html=True
-    )
-
-# =====================================================
-# PRODUTOS
-# =====================================================
-
-def mostrar_produtos(df_canal, canal):
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    st.markdown(
-        f"""
-        <div class='canal-title'>
-            {canal}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    quinzenas = sorted(
-        df_canal["Quinzena"]
-        .dropna()
-        .unique()
-    )
-
-    for quinzena in quinzenas:
-
-        st.markdown(
-            f"""
-            <div class='quinzena-title'>
-                {quinzena}ª QUINZENA
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        produtos_q = df_canal[
-            df_canal["Quinzena"] == quinzena
-        ]
-
-        cols = st.columns(6)
-
-        for i, (_, row) in enumerate(produtos_q.iterrows()):
-
-            with cols[i % 6]:
-
-                try:
-
-                    st.image(
-                        f"images/produtos/{row['Imagem']}",
-                        width=85
-                    )
-
-                except:
-                    st.empty()
-
-                st.markdown(
-                    f"""
-                    <div class='sku-name'>
-                        {row['SKU']}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-                st.markdown(
-                    f"""
-                    <div class='old-price'>
-                        R$ {float(row['De']):.2f}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-                st.markdown(
-                    f"""
-                    <div class='new-price'>
-                        R$ {float(row['Para']):.2f}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-# =====================================================
-# EXIBIÇÃO DOS CANAIS
-# =====================================================
-
-if produtos.empty:
-
-    st.warning(
-        "Nenhum produto encontrado para esse mês/regional."
-    )
-
-else:
-
-    for canal in produtos["Canal"].dropna().unique():
-
-        df_canal = produtos[
-            produtos["Canal"] == canal
-        ]
-
-        mostrar_produtos(
-            df_canal,
-            canal
-        )
+   

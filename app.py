@@ -356,6 +356,7 @@ def mostrar_produtos(df_canal, canal):
                     f"""
                     <div style="
                         text-align:center;
+                        border:1px solid red;
                         width:100%;
                         font-weight:bold;
                         margin-top:8px;

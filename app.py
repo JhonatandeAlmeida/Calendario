@@ -139,7 +139,7 @@ produtos = prod_df[
 ]
 
 mecanica = mec_df[
-    mec_df["Regional"].astype(str) == regional
+    mec_df["Mes"].astype(str) == mes
 ]
 
 # =====================================================

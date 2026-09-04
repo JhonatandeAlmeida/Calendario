@@ -354,7 +354,13 @@ def mostrar_produtos(df_canal, canal):
 
                 st.markdown(
                     f"""
-                    <div class="sku-name">
+                    <div style="
+                        text-align:center;
+                        width:100%;
+                        font-weight:bold;
+                        margin-top:8px;
+                        margin-bottom:8px;
+                    ">
                         {row['SKU']}
                     </div>
                     """,

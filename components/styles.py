@@ -82,6 +82,22 @@ def load_css():
         border-radius:20px;
         margin-top:5px;
     }
+    
+    .mecanica-subtitle{
+    background:#E8E8E8;
+    color:black;
+    text-align:center;
+    font-weight:bold;
+    padding:8px;
+    border-radius:5px;
+    margin-top:10px;
+    margin-bottom:10px;
+    }
+
+    .mecanica-lista{
+    margin-left:10px;
+    margin-bottom:15px;
+    }
 
     </style>
     """, unsafe_allow_html=True)

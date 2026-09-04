@@ -245,21 +245,52 @@ with col2:
         unsafe_allow_html=True
     )
 
-    lista_itens = ""
+    mecanica_mes = mec_df[
+        mec_df["Mes"].astype(str) == mes
+    ]
 
-    for _, row in mecanica.iterrows():
-        lista_itens += f"<li>{row['Texto']}</li>"
+    sell_in = mecanica_mes[
+        mecanica_mes["Tipo"] == "Sell In"
+    ]
 
-    html_mecanica = f"""
-    <div class='mecanica-box'>
-        <ul>
-            {lista_itens}
-        </ul>
-    </div>
-    """
+    sell_out = mecanica_mes[
+        mecanica_mes["Tipo"] == "Sell Out"
+    ]
+
+    html = "<div class='mecanica-box'>"
+
+    if len(sell_in) > 0:
+
+        html += """
+        <div class='mecanica-subtitle'>
+            SELL IN
+        </div>
+        <ul class='mecanica-lista'>
+        """
+
+        for _, row in sell_in.iterrows():
+            html += f"<li>{row['Texto']}</li>"
+
+        html += "</ul>"
+
+    if len(sell_out) > 0:
+
+        html += """
+        <div class='mecanica-subtitle'>
+            SELL OUT
+        </div>
+        <ul class='mecanica-lista'>
+        """
+
+        for _, row in sell_out.iterrows():
+            html += f"<li>{row['Texto']}</li>"
+
+        html += "</ul>"
+
+    html += "</div>"
 
     st.markdown(
-        html_mecanica,
+        html,
         unsafe_allow_html=True
     )
 

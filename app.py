@@ -346,10 +346,13 @@ def mostrar_produtos(df_canal, canal):
 
                 try:
 
+                    c1, c2, c3 = st.columns([1, 2, 1])
+
+                with c2:
                     st.image(
-                        f"images/produtos/{row['Imagem']}",
-                        width=85
-                    )
+                    f"images/produtos/{row['Imagem']}",
+                    width=85
+                )
 
                 except:
                     st.empty()

@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
- 
+
 from io import BytesIO
- 
+
 from reportlab.lib import colors
 from reportlab.lib.units import cm
 from reportlab.platypus import (
@@ -14,7 +14,7 @@ Table,
 TableStyle
 )
 from reportlab.lib.styles import getSampleStyleSheet
- 
+
 from components.calendar import gerar_calendario
 from components.styles import load_css
 

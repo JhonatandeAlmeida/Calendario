@@ -345,17 +345,16 @@ def mostrar_produtos(df_canal, canal):
             with cols[i % 6]:
 
                 try:
+    c1, c2, c3 = st.columns([1, 2, 1])
 
-                    c1, c2, c3 = st.columns([1, 2, 1])
+    with c2:
+        st.image(
+            f"images/produtos/{row['Imagem']}",
+            width=85
+        )
 
-                with c2:
-                    st.image(
-                    f"images/produtos/{row['Imagem']}",
-                    width=85
-                )
-
-                except:
-                    st.empty()
+except Exception:
+    st.empty()
 
                 st.markdown(
                     f"""

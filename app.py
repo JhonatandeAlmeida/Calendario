@@ -21,7 +21,7 @@ from components.styles import load_css
 # ==================================================
 # FUNÇÃO PDF
 # ==================================================
- 
+
 def gerar_pdf(
     titulo,
     mes,

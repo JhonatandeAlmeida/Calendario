@@ -383,6 +383,24 @@ regionais = sorted(
     .unique()
 )
 
+canais = sorted(
+    prod_df.loc[
+        (prod_df["Tipo"] == negocio)
+        &
+        (prod_df["Regional"] == regional),
+        "Canal"
+    ]
+    .dropna()
+    .astype(str)
+    .unique()
+)
+
+canal = st.radio(
+    "Canal",
+    ["Varejo", "Atacado"],
+    horizontal=True
+)
+
 colf1, colf2 = st.columns(2)
 
 with colf1:
@@ -413,8 +431,9 @@ produtos = prod_df[
     (prod_df["Mes"].astype(str) == mes)
     &
     (prod_df["Regional"].astype(str) == regional)
+    &
+    (prod_df["Canal"].astype(str) == canal)
 ]
-
 mecanica_mes = mec_df[
     (mec_df["SKU"].astype(str) == negocio)
     &

@@ -72,9 +72,9 @@ def load_css():
         font-size:18px;
         font-weight:bold;
         border-radius:5px;
-        padding:8px;
-        margin-top:10px;
-        margin-bottom:15px;
+        padding:6px;
+        margin-top:5px;
+        margin-bottom:5px;
     }
 
     .produto-card{

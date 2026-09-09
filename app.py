@@ -310,8 +310,8 @@ for arquivo in os.listdir(PASTA_ORIGINAL):
             "PNG"
         )
 
-    except Exception as e:
-        st.error(f"{arquivo}: {e}")
+    except Exception:
+        pass
 
 # ==================================================
 # CONFIG

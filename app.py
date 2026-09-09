@@ -608,14 +608,7 @@ def mostrar_produtos(df_canal, canal):
 
                 # Área fixa para imagem
                 st.markdown(
-                    """
-                    <div style="
-                        height:100px;
-                        display:flex;
-                        justify-content:center;
-                        align-items:center;
-                    ">
-                    """,
+                    "</div>",
                     unsafe_allow_html=True
                 )
 

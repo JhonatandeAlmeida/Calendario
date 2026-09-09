@@ -35,7 +35,7 @@ def padronizar_imagem(caminho_imagem):
     proporcao = min(
         tamanho / img.width,
         tamanho / img.height
-    ) * 2
+    ) * 1
     
     nova_largura = int(img.width * proporcao)
     nova_altura = int(img.height * proporcao)
@@ -287,10 +287,10 @@ def mostrar_produtos(df_canal, canal, negocio):
 
         if negocio.upper() == "CERV":
             qtd_colunas = 10
-            largura_imagem = 200
+            largura_imagem = 80
         else:
             qtd_colunas = 6
-            largura_imagem = 200
+            largura_imagem = 130
         
         cols = st.columns(qtd_colunas)
 

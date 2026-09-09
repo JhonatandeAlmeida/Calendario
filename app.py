@@ -46,7 +46,7 @@ def padronizar_imagem(caminho_imagem):
     )
 
     pos_x = (tamanho - nova_largura) // 2
-    pos_y = (tamanho - nova_altura) // 2
+    pos_y = (tamanho - nova_altura) // 1.5
 
     canvas.paste(
         img,

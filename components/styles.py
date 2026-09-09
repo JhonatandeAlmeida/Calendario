@@ -90,7 +90,7 @@ def load_css():
         font-weight:bold;
         color:black;
         margin-top:8px;
-        margin-bottom:8px;
+        margin-bottom:2px;
         min-height:35px;
     }
     

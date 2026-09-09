@@ -24,7 +24,7 @@ def padronizar_imagem(caminho_imagem):
 
     img = Image.open(caminho_imagem).convert("RGBA")
 
-    tamanho = 1000
+    tamanho = 200
 
     canvas = Image.new(
         "RGBA",

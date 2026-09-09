@@ -287,10 +287,10 @@ def mostrar_produtos(df_canal, canal, negocio):
 
         if negocio.upper() == "CERV":
             qtd_colunas = 10
-            largura_imagem = 80
+            largura_imagem = 300
         else:
             qtd_colunas = 6
-            largura_imagem = 130
+            largura_imagem = 300
         
         cols = st.columns(qtd_colunas)
 

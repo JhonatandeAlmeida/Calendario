@@ -79,7 +79,7 @@ def load_css():
 
     .produto-card{
         text-align:center;
-        padding:20px;
+        padding:5px;
         margin-bottom:5px;
     }
 

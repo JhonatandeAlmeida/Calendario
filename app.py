@@ -614,12 +614,12 @@ def mostrar_produtos(df_canal, canal):
 
                 try:
 
-                    c1, c2, c3 = st.columns([1, 2, 1])
+                    c1, c2, c3 = st.columns([1, 1, 1])
 
                     with c2:
                         st.image(
                             f"images/produtos_padronizados/{row['Imagem']}",
-                            width=130
+                            width=100
                         )
 
                 except Exception:

@@ -58,12 +58,11 @@ def load_css():
         background:#6E6E6E;
         color:white;
         text-align:center;
-        font-size:24px;
+        font-size:22px;
         font-weight:bold;
         border-radius:5px;
-        padding:10px;
-        margin-top:20px;
-        margin-bottom:15px;
+        padding:8px;
+        margin-bottom:10px;
     }
 
     .quinzena-title{

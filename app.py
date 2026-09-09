@@ -286,14 +286,17 @@ def mostrar_produtos(df_canal, canal, negocio):
         )
 
         if negocio.upper() == "CERV":
-            cols = st.columns(6)
+            qtd_colunas = 6
+            largura_imagem = 130
         else:
-            cols = st.columns(4)
-
+            qtd_colunas = 4
+            largura_imagem = 130
+        
+        cols = st.columns(qtd_colunas)
 
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
-            with cols[i % 4]:
+            with cols[i % qtd_colunas]:
                 preco_de = float(row["De"])
                 preco_para = float(row["Para"])
 
@@ -311,7 +314,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                     with c2:
                         st.image(
                             f"images/produtos_padronizados/{row['Imagem']}",
-                            width=130
+                            width=largura_imagem
                         )
 
                 except Exception:

@@ -301,11 +301,6 @@ def mostrar_produtos(df_canal, canal, negocio):
                 preco_para = float(row["Para"])
 
                 delta_rs = preco_de - preco_para
-                # Área fixa para imagem
-                st.markdown(
-                    "</div>",
-                    unsafe_allow_html=True
-                )
 
                 try:
 

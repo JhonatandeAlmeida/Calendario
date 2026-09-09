@@ -80,7 +80,7 @@ def load_css():
     .produto-card{
         text-align:center;
         padding:10px;
-        margin-bottom:15px;
+        margin-bottom:5px;
     }
 
     .sku-name{

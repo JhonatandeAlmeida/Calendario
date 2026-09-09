@@ -310,6 +310,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                         st.image(
                             f"images/produtos_padronizados/{row['Imagem']}",
                             width=largura_imagem
+                            height=170
                         )
 
                 except Exception:

@@ -535,9 +535,26 @@ def mostrar_produtos(df_canal, canal):
                     c1,c2,c3 = st.columns([1,2,1])
                     
                     with c2:
+                        st.markdown(
+                            """
+                            <div style="
+                                height:180px;
+                                display:flex;
+                                justify-content:center;
+                                align-items:center;
+                            ">
+                            """,
+                            unsafe_allow_html=True
+                        )
+                        
                         st.image(
                             f"images/produtos/{row['Imagem']}",
-                            width=85
+                            width=100
+                        )
+                        
+                        st.markdown(
+                            "</div>",
+                            unsafe_allow_html=True
                         )
 
                 except Exception:

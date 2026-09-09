@@ -362,8 +362,22 @@ meses = sorted(
     .unique()
 )
 
+negocios = sorted(
+    prod_df["Tipo"]
+    .dropna()
+    .astype(str)
+    .unique()
+)
+
+negocio = st.selectbox(
+    "Tipo",
+    negocios
+)
 regionais = sorted(
-    prod_df["Regional"]
+    prod_df.loc[
+        prod_df["Tipo"] == negocio,
+        "Regional"
+    ]
     .dropna()
     .astype(str)
     .unique()
@@ -394,18 +408,24 @@ with colf2:
 # ==================================================
 
 produtos = prod_df[
+    (prod_df["Tipo"].astype(str) == negocio)
+    &
     (prod_df["Mes"].astype(str) == mes)
     &
     (prod_df["Regional"].astype(str) == regional)
 ]
 
 mecanica_mes = mec_df[
-    mec_df["Mes"]
-    .astype(str)
-    .str.strip()
-    .str.upper()
-    ==
-    mes.strip().upper()
+    (mec_df["SKU"].astype(str) == negocio)
+    &
+    (
+        mec_df["Mes"]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+        ==
+        mes.strip().upper()
+    )
 ]
 
 # ==================================================

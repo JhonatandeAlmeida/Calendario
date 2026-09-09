@@ -79,8 +79,8 @@ def load_css():
 
     .produto-card{
         text-align:center;
-        padding:5px;
-        margin-bottom:5px;
+        padding:20px;
+        margin-bottom:2px;
     }
 
     .sku-name{

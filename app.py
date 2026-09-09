@@ -249,8 +249,6 @@ load_css()
 
 def mostrar_produtos(df_canal, canal):
 
-    st.markdown("<br>", unsafe_allow_html=True)
-
     st.markdown(
         f"""
         <div class="canal-title">

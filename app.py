@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from PIL import Image
+import os
 
 from io import BytesIO
 
@@ -17,6 +19,42 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 from components.calendar import gerar_calendario
 from components.styles import load_css
+
+def padronizar_imagem(caminho_imagem):
+
+    img = Image.open(caminho_imagem).convert("RGBA")
+
+    tamanho = 600
+
+    canvas = Image.new(
+        "RGBA",
+        (tamanho, tamanho),
+        (255, 255, 255, 0)
+    )
+
+    proporcao = min(
+        tamanho / img.width,
+        tamanho / img.height
+    ) * 0.85
+
+    nova_largura = int(img.width * proporcao)
+    nova_altura = int(img.height * proporcao)
+
+    img = img.resize(
+        (nova_largura, nova_altura),
+        Image.LANCZOS
+    )
+
+    pos_x = (tamanho - nova_largura) // 2
+    pos_y = (tamanho - nova_altura) // 2
+
+    canvas.paste(
+        img,
+        (pos_x, pos_y),
+        img
+    )
+
+    return canvas
 
 # ==================================================
 # FUNÇÃO PDF
@@ -236,6 +274,44 @@ except Exception as e:
 
     st.error(f"Erro ao abrir a planilha: {e}")
     st.stop()
+
+# ==================================================
+# PADRONIZAÇÃO DAS IMAGENS
+# ==================================================
+
+PASTA_ORIGINAL = "images/produtos"
+PASTA_PADRONIZADA = "images/produtos_padronizados"
+
+os.makedirs(
+    PASTA_PADRONIZADA,
+    exist_ok=True
+)
+
+for arquivo in os.listdir(PASTA_ORIGINAL):
+
+    origem = os.path.join(
+        PASTA_ORIGINAL,
+        arquivo
+    )
+
+    destino = os.path.join(
+        PASTA_PADRONIZADA,
+        arquivo
+    )
+
+    try:
+
+        imagem = padronizar_imagem(
+            origem
+        )
+
+        imagem.save(
+            destino,
+            "PNG"
+        )
+
+    except Exception:
+        pass
 
 # ==================================================
 # CONFIG
@@ -548,8 +624,8 @@ def mostrar_produtos(df_canal, canal):
 
                     with c2:
                         st.image(
-                            f"images/produtos/{row['Imagem']}",
-                            width=110
+                            f"images/produtos_padronizados/{row['Imagem']}",
+                            width=130
                         )
 
                 except Exception:

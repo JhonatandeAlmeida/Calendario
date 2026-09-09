@@ -93,7 +93,7 @@ def load_css():
         margin-bottom:8px;
         min-height:35px;
     }
-
+    
     .old-price{
         background:#6E6E6E;
         color:white;
@@ -102,9 +102,8 @@ def load_css():
         padding:6px;
         width:80%;
         margin:5px auto;
-        font-size:13px;
     }
-
+    
     .new-price{
         background:#B3B3B3;
         color:white;
@@ -113,10 +112,7 @@ def load_css():
         padding:6px;
         width:80%;
         margin:5px auto;
-        font-size:13px;
-        font-weight:bold;
     }
-
     [data-testid="stImage"]{
         text-align:center;
     }

@@ -247,11 +247,6 @@ load_css()
 # PRODUTOS
 # ==================================================
 
-preco_de = float(row["De"])
-preco_para = float(row["Para"])
-
-delta_rs = preco_de - preco_para
-
 def mostrar_produtos(df_canal, canal):
 
     st.markdown(
@@ -295,7 +290,10 @@ def mostrar_produtos(df_canal, canal):
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
             with cols[i % 4]:
+                preco_de = float(row["De"])
+                preco_para = float(row["Para"])
 
+                delta_rs = preco_de - preco_para
                 # Área fixa para imagem
                 st.markdown(
                     "</div>",

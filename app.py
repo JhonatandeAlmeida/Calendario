@@ -20,24 +20,6 @@ from reportlab.lib.styles import getSampleStyleSheet
 from components.calendar import gerar_calendario
 from components.styles import load_css
 
-from streamlit_javascript import st_javascript
-
-largura_tela = st_javascript(
-    "window.innerWidth"
-)
-
-is_mobile = largura_tela < 768
-
-if is_mobile:
-    qtd_colunas = 2
-else:
-    qtd_colunas = 5
-
-if is_mobile:
-    largura_imagem = 80
-else:
-    largura_imagem = 110
-
 def padronizar_imagem(caminho_imagem):
 
     img = Image.open(caminho_imagem).convert("RGBA")
@@ -624,7 +606,7 @@ def mostrar_produtos(df_canal, canal):
             )
         )
 
-        cols = st.columns(qtd_colunas)
+        cols = st.columns(4)
 
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
@@ -643,7 +625,7 @@ def mostrar_produtos(df_canal, canal):
                     with c2:
                         st.image(
                             f"images/produtos_padronizados/{row['Imagem']}",
-                            width=largura_imagem
+                            width=130
                         )
 
                 except Exception:

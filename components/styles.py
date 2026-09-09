@@ -74,13 +74,12 @@ def load_css():
         border-radius:5px;
         padding:6px;
         margin-top:5px;
-        margin-bottom:5px;
+        margin-bottom:15px;
     }
 
     .produto-card{
         text-align:center;
-        padding:20px;
-        margin-top:25px;
+        padding:10px;
         margin-bottom:2px;
     }
 

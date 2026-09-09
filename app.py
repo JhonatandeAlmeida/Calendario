@@ -561,6 +561,12 @@ with col2:
         html,
         unsafe_allow_html=True
     )
+
+import os
+
+st.write(
+    os.listdir("images/produtos_padronizados")
+)
 # ==================================================
 # PRODUTOS
 # ==================================================

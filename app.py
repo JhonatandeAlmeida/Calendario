@@ -289,8 +289,8 @@ def mostrar_produtos(df_canal, canal, negocio):
             qtd_colunas = 6
             largura_imagem = 180
         else:
-            qtd_colunas = 6
-            largura_imagem = 130
+            qtd_colunas = 5
+            largura_imagem = 180
         
         cols = st.columns(qtd_colunas)
 

@@ -24,7 +24,7 @@ def padronizar_imagem(caminho_imagem):
 
     img = Image.open(caminho_imagem).convert("RGBA")
 
-    tamanho = 1000
+    tamanho = 600
 
     canvas = Image.new(
         "RGBA",
@@ -287,10 +287,10 @@ def mostrar_produtos(df_canal, canal, negocio):
 
         if negocio.upper() == "CERV":
             qtd_colunas = 6
-            largura_imagem = 150
+            largura_imagem = 200
         else:
             qtd_colunas = 4
-            largura_imagem = 100
+            largura_imagem = 200
         
         cols = st.columns(qtd_colunas)
 

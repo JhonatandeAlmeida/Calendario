@@ -714,21 +714,7 @@ with col_direita:
             canal
         )
 
-# ==================================================
-# EXIBIÇÃO DOS CANAIS
-# ==================================================
 
-if produtos.empty:
-
-    st.warning(
-        "Nenhum produto encontrado."
-    )
-
-else:
-        mostrar_produtos(
-            df_canal,
-            canal
-        )
 pdf_file = gerar_pdf(
     titulo=titulo,
     mes=mes,

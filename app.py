@@ -383,24 +383,6 @@ regionais = sorted(
     .unique()
 )
 
-canais = sorted(
-    prod_df.loc[
-        (prod_df["Tipo"] == negocio)
-        &
-        (prod_df["Regional"] == regional),
-        "Canal"
-    ]
-    .dropna()
-    .astype(str)
-    .unique()
-)
-
-canal = st.radio(
-    "Canal",
-    ["Varejo", "Atacado"],
-    horizontal=True
-)
-
 colf1, colf2 = st.columns(2)
 
 with colf1:
@@ -420,6 +402,23 @@ with colf2:
         index=regionais.index(regional_padrao)
         if regional_padrao in regionais else 0
     )
+canais = sorted(
+    prod_df.loc[
+        (prod_df["Tipo"] == negocio)
+        &
+        (prod_df["Regional"] == regional),
+        "Canal"
+    ]
+    .dropna()
+    .astype(str)
+    .unique()
+)
+
+canal = st.radio(
+    "Canal",
+    ["Varejo", "Atacado"],
+    horizontal=True
+)
 
 # ==================================================
 # FILTROS DE DADOS

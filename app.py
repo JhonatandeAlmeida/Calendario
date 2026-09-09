@@ -38,7 +38,7 @@ def padronizar_imagem(caminho_imagem):
     ) * 1.20
     
     nova_largura = int(img.width * proporcao)
-    nova_altura = int(img.height * proporcao)
+    nova_altura = int(img.height )
 
     img = img.resize(
         (nova_largura, nova_altura),
@@ -46,7 +46,7 @@ def padronizar_imagem(caminho_imagem):
     )
 
     pos_x = (tamanho - nova_largura) // 2
-    pos_y = (tamanho - nova_altura) // 1.5
+    pos_y = (tamanho - nova_altura) // 2
 
     canvas.paste(
         img,

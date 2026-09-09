@@ -242,6 +242,108 @@ st.set_page_config(
 
 load_css()
 
+
+# ==================================================
+# PRODUTOS
+# ==================================================
+
+def mostrar_produtos(df_canal, canal):
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    st.markdown(
+        f"""
+        <div class="canal-title">
+            {canal}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    quinzenas = sorted(
+        df_canal["Quinzena"]
+        .dropna()
+        .unique()
+    )
+
+    for quinzena in quinzenas:
+
+        st.markdown(
+            f"""
+            <div class="quinzena-title">
+                {quinzena}ª QUINZENA
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        produtos_q = (
+            df_canal[
+                df_canal["Quinzena"] == quinzena
+            ]
+            .sort_values(
+                by="Para",
+                ascending=True
+            )
+        )
+
+        cols = st.columns(4)
+
+        for i, (_, row) in enumerate(produtos_q.iterrows()):
+
+            with cols[i % 4]:
+
+                # Área fixa para imagem
+                st.markdown(
+                    "</div>",
+                    unsafe_allow_html=True
+                )
+
+                try:
+
+                    c1, c2, c3 = st.columns([1, 1, 1])
+
+                    with c2:
+                        st.image(
+                            f"images/produtos_padronizados/{row['Imagem']}",
+                            width=130
+                        )
+
+                except Exception:
+                    st.empty()
+
+                st.markdown(
+                    "</div>",
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(
+                    f"""
+                    <div class="sku-name">
+                        {row['SKU']}
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(
+                    f"""
+                    <div class="old-price">
+                        R$ {float(row['De']):.2f}
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(
+                    f"""
+                    <div class="new-price">
+                        R$ {float(row['Para']):.2f}
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
 # ==================================================
 # LEITURA DA PLANILHA
 # ==================================================
@@ -612,106 +714,6 @@ with col_direita:
             canal
         )
 
-# ==================================================
-# PRODUTOS
-# ==================================================
-
-def mostrar_produtos(df_canal, canal):
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    st.markdown(
-        f"""
-        <div class="canal-title">
-            {canal}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    quinzenas = sorted(
-        df_canal["Quinzena"]
-        .dropna()
-        .unique()
-    )
-
-    for quinzena in quinzenas:
-
-        st.markdown(
-            f"""
-            <div class="quinzena-title">
-                {quinzena}ª QUINZENA
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        produtos_q = (
-            df_canal[
-                df_canal["Quinzena"] == quinzena
-            ]
-            .sort_values(
-                by="Para",
-                ascending=True
-            )
-        )
-
-        cols = st.columns(4)
-
-        for i, (_, row) in enumerate(produtos_q.iterrows()):
-
-            with cols[i % 4]:
-
-                # Área fixa para imagem
-                st.markdown(
-                    "</div>",
-                    unsafe_allow_html=True
-                )
-
-                try:
-
-                    c1, c2, c3 = st.columns([1, 1, 1])
-
-                    with c2:
-                        st.image(
-                            f"images/produtos_padronizados/{row['Imagem']}",
-                            width=130
-                        )
-
-                except Exception:
-                    st.empty()
-
-                st.markdown(
-                    "</div>",
-                    unsafe_allow_html=True
-                )
-
-                st.markdown(
-                    f"""
-                    <div class="sku-name">
-                        {row['SKU']}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-                st.markdown(
-                    f"""
-                    <div class="old-price">
-                        R$ {float(row['De']):.2f}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-                st.markdown(
-                    f"""
-                    <div class="new-price">
-                        R$ {float(row['Para']):.2f}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
 # ==================================================
 # EXIBIÇÃO DOS CANAIS
 # ==================================================

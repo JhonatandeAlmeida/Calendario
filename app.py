@@ -596,9 +596,15 @@ def mostrar_produtos(df_canal, canal):
             unsafe_allow_html=True
         )
 
-        produtos_q = df_canal[
-            df_canal["Quinzena"] == quinzena
-        ]
+        produtos_q = (
+            df_canal[
+                df_canal["Quinzena"] == quinzena
+            ]
+            .sort_values(
+                by="Para",
+                ascending=True
+            )
+        )
 
         cols = st.columns(4)
 

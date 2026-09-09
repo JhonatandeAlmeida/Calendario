@@ -35,7 +35,7 @@ def padronizar_imagem(caminho_imagem):
     proporcao = min(
         tamanho / img.width,
         tamanho / img.height
-    ) * 1.5
+    ) * 0.95
     
     nova_largura = int(img.width * proporcao)
     nova_altura = int(img.height * proporcao)
@@ -309,8 +309,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                     with c2:
                         st.image(
                             f"images/produtos_padronizados/{row['Imagem']}",
-                            width=largura_imagem,
-                            height=400
+                            width=largura_imagem
                         )
 
                 except Exception:

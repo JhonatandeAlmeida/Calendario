@@ -619,7 +619,7 @@ with col_logo:
 # CALENDÁRIO E MECÂNICA
 # ==================================================
 
-col_esquerda, col_direita = st.columns([0.8, 2.2])
+col_esquerda, col_direita = st.columns([1, 2])
 
 with col_esquerda:
 

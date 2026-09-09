@@ -612,35 +612,29 @@ def mostrar_produtos(df_canal, canal):
 
             with cols[i % 4]:
 
+                # Área fixa para imagem
+                st.markdown(
+                    "</div>",
+                    unsafe_allow_html=True
+                )
+
                 try:
 
-                    # Container fixo da imagem
-                    st.markdown(
-                        """
-                        <div style="
-                            height:140px;
-                            width:140px;
-                            margin:auto;
-                            display:flex;
-                            justify-content:center;
-                            align-items:center;
-                        ">
-                        """,
-                        unsafe_allow_html=True
-                    )
+                    c1, c2, c3 = st.columns([1, 1, 1])
 
-                    st.image(
-                        f"images/produtos_padronizados/{row['Imagem']}",
-                        width=100
-                    )
-
-                    st.markdown(
-                        "</div>",
-                        unsafe_allow_html=True
-                    )
+                    with c2:
+                        st.image(
+                            f"images/produtos_padronizados/{row['Imagem']}",
+                            width=130
+                        )
 
                 except Exception:
                     st.empty()
+
+                st.markdown(
+                    "</div>",
+                    unsafe_allow_html=True
+                )
 
                 st.markdown(
                     f"""

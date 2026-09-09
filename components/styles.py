@@ -109,7 +109,8 @@ def load_css():
         text-align:center;
         border-radius:20px;
         padding:6px;
-        width:80%;
+        width:80%;        
+        margin-bottom:10px;
         margin:5px auto;
     }
     [data-testid="stImage"]{

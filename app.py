@@ -433,7 +433,7 @@ produtos = prod_df[
     (prod_df["Canal"].astype(str) == canal)
 ]
 mecanica_mes = mec_df[
-    (mec_df["Tipo"].astype(str) == negocio)
+    (mec_df["SKU"].astype(str) == negocio)
     &
     (
         mec_df["Mes"]

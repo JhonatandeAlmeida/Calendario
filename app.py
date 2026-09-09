@@ -517,9 +517,9 @@ with col_logo:
 # CALENDÁRIO E MECÂNICA
 # ==================================================
 
-col1, col2 = st.columns([1, 1])
+col_esquerda, col_direita = st.columns([0.8, 2.2])
 
-with col1:
+with col_esquerda:
 
     st.markdown(
         """
@@ -536,7 +536,7 @@ with col1:
         eventos
     )
 
-with col2:
+    st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown(
         """
@@ -547,56 +547,25 @@ with col2:
         unsafe_allow_html=True
     )
 
-    sell_in = mecanica_mes[
-        mecanica_mes["Tipo"]
-        .astype(str)
-        .str.upper()
-        == "SELL IN"
-    ]
-
-    sell_out = mecanica_mes[
-        mecanica_mes["Tipo"]
-        .astype(str)
-        .str.upper()
-        == "SELL OUT"
-    ]
-
-    html = "<div class='mecanica-box'>"
-
-    if not sell_in.empty:
-
-        html += """
-        <div class='mecanica-subtitle'>
-            SELL IN
-        </div>
-        <ul class='mecanica-lista'>
-        """
-
-        for _, row in sell_in.iterrows():
-            html += f"<li>{row['Texto']}</li>"
-
-        html += "</ul>"
-
-    if not sell_out.empty:
-
-        html += """
-        <div class='mecanica-subtitle'>
-            SELL OUT
-        </div>
-        <ul class='mecanica-lista'>
-        """
-
-        for _, row in sell_out.iterrows():
-            html += f"<li>{row['Texto']}</li>"
-
-        html += "</ul>"
-
-    html += "</div>"
-
     st.markdown(
         html,
         unsafe_allow_html=True
     )
+
+with col_direita:
+
+    if produtos.empty:
+
+        st.warning(
+            "Nenhum produto encontrado."
+        )
+
+    else:
+
+        mostrar_produtos(
+            produtos,
+            canal
+        )
 
 # ==================================================
 # PRODUTOS
@@ -709,13 +678,6 @@ if produtos.empty:
     )
 
 else:
-
-    for canal in produtos["Canal"].dropna().unique():
-
-        df_canal = produtos[
-            produtos["Canal"] == canal
-        ]
-
         mostrar_produtos(
             df_canal,
             canal

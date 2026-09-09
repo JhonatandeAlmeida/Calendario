@@ -610,7 +610,7 @@ def mostrar_produtos(df_canal, canal):
                 st.markdown(
                     """
                     <div style="
-                        height:180px;
+                        height:100px;
                         display:flex;
                         justify-content:center;
                         align-items:center;

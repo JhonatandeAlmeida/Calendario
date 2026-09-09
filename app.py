@@ -416,10 +416,9 @@ canais = sorted(
 
 canal = st.radio(
     "Canal",
-    ["Varejo", "Atacado"],
+    canais,
     horizontal=True
 )
-
 # ==================================================
 # FILTROS DE DADOS
 # ==================================================
@@ -434,7 +433,7 @@ produtos = prod_df[
     (prod_df["Canal"].astype(str) == canal)
 ]
 mecanica_mes = mec_df[
-    (mec_df["SKU"].astype(str) == negocio)
+    (mec_df["Tipo"].astype(str) == negocio)
     &
     (
         mec_df["Mes"]
@@ -445,7 +444,6 @@ mecanica_mes = mec_df[
         mes.strip().upper()
     )
 ]
-
 # ==================================================
 # CALENDÁRIO
 # ==================================================

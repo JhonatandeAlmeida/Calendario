@@ -11,7 +11,7 @@ from reportlab.platypus import (
 SimpleDocTemplate,
 Paragraph,
 Spacer,
-Image,
+Image as PdfImage,
 Table,
 TableStyle
 )

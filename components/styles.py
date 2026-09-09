@@ -85,12 +85,12 @@ def load_css():
 
     .sku-name{
         text-align:center;
-        font-size:14px;
+        font-size:18px;
         font-weight:bold;
         color:black;
-        margin-top:8px;
+        margin-top:2px;
         margin-bottom:2px;
-        min-height:35px;
+        min-height:25px;
     }
     
     .old-price{

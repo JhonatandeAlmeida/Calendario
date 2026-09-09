@@ -310,8 +310,8 @@ for arquivo in os.listdir(PASTA_ORIGINAL):
             "PNG"
         )
 
-    except Exception:
-        pass
+    except Exception as e:
+        st.error(f"{arquivo}: {e}")
 
 # ==================================================
 # CONFIG
@@ -562,11 +562,6 @@ with col2:
         unsafe_allow_html=True
     )
 
-import os
-
-st.write(
-    os.listdir("images/produtos_padronizados")
-)
 # ==================================================
 # PRODUTOS
 # ==================================================

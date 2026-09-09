@@ -247,6 +247,11 @@ load_css()
 # PRODUTOS
 # ==================================================
 
+preco_de = float(row["De"])
+preco_para = float(row["Para"])
+
+delta_rs = preco_de - preco_para
+
 def mostrar_produtos(df_canal, canal):
 
     st.markdown(
@@ -326,8 +331,17 @@ def mostrar_produtos(df_canal, canal):
 
                 st.markdown(
                     f"""
+                    <div class="delta-price">
+                        ↓ R$ {delta_rs:.2f}
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(
+                    f"""
                     <div class="old-price">
-                        R$ {float(row['De']):.2f}
+                        R$ {preco_de:.2f}
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -336,7 +350,7 @@ def mostrar_produtos(df_canal, canal):
                 st.markdown(
                     f"""
                     <div class="new-price">
-                        R$ {float(row['Para']):.2f}
+                        R$ {preco_para:.2f}
                     </div>
                     """,
                     unsafe_allow_html=True

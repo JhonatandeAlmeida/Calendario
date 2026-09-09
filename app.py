@@ -247,7 +247,7 @@ load_css()
 # PRODUTOS
 # ==================================================
 
-def mostrar_produtos(df_canal, canal):
+def mostrar_produtos(df_canal, canal, negocio):
 
     st.markdown(
         f"""
@@ -285,7 +285,11 @@ def mostrar_produtos(df_canal, canal):
             )
         )
 
-        cols = st.columns(4)
+        if negocio.upper() == "CERV":
+            cols = st.columns(6)
+        else:
+            cols = st.columns(4)
+
 
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
@@ -721,7 +725,8 @@ with col_direita:
 
         mostrar_produtos(
             produtos,
-            canal
+            canal,
+            negocio
         )
 
 

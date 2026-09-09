@@ -4,3 +4,4 @@ openpyxl
 streamlit-calendar
 Pillow
 reportlab
+streamlit-javascript

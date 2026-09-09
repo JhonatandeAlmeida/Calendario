@@ -315,10 +315,6 @@ def mostrar_produtos(df_canal, canal, negocio):
                 except Exception:
                     st.empty()
 
-                st.markdown(
-                    "</div>",
-                    unsafe_allow_html=True
-                )
 
                 st.markdown(
                     f"""

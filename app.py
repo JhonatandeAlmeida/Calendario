@@ -309,7 +309,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                     with c2:
                         st.image(
                             f"images/produtos_padronizados/{row['Imagem']}",
-                            width=largura_imagem
+                            width=largura_imagem,
                             height=170
                         )
 

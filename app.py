@@ -485,7 +485,6 @@ with col2:
         html,
         unsafe_allow_html=True
     )
-
 # ==================================================
 # PRODUTOS
 # ==================================================
@@ -524,51 +523,46 @@ def mostrar_produtos(df_canal, canal):
             df_canal["Quinzena"] == quinzena
         ]
 
-        cols = st.columns(6)
+        cols = st.columns(4)
 
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
-            with cols[i % 6]:
+            with cols[i % 4]:
+
+                # Área fixa para imagem
+                st.markdown(
+                    """
+                    <div style="
+                        height:180px;
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                    ">
+                    """,
+                    unsafe_allow_html=True
+                )
 
                 try:
 
-                    c1,c2,c3 = st.columns([1,2,1])
-                    
+                    c1, c2, c3 = st.columns([1, 2, 1])
+
                     with c2:
-                        st.markdown(
-                            """
-                            <div style="
-                                height:180px;
-                                display:flex;
-                                justify-content:center;
-                                align-items:center;
-                            ">
-                            """,
-                            unsafe_allow_html=True
-                        )
-                        
                         st.image(
                             f"images/produtos/{row['Imagem']}",
-                            width=100
-                        )
-                        
-                        st.markdown(
-                            "</div>",
-                            unsafe_allow_html=True
+                            width=110
                         )
 
                 except Exception:
                     st.empty()
 
                 st.markdown(
+                    "</div>",
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(
                     f"""
-                    <div style="
-                        text-align:center;
-                        width:100%;
-                        font-weight:bold;
-                        margin-top:8px;
-                        margin-bottom:8px;
-                    ">
+                    <div class="sku-name">
                         {row['SKU']}
                     </div>
                     """,

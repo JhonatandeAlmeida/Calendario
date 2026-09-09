@@ -116,5 +116,16 @@ def load_css():
         text-align:center;
     }
 
+    .delta-price{
+    background:#E8F5E9;
+    color:#00A651;
+    border-radius:12px;
+    width:70%;
+    margin:4px auto 8px auto;
+    padding:4px;
+    text-align:center;
+    font-weight:bold;
+    }
+
     </style>
     """, unsafe_allow_html=True)

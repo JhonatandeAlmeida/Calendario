@@ -242,6 +242,19 @@ st.set_page_config(
 
 load_css()
 
+st.markdown(
+    """
+    <style>
+    [data-testid="stImage"] img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # ==================================================
 # PRODUTOS

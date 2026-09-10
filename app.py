@@ -263,6 +263,11 @@ def mostrar_produtos(df_canal, canal, negocio):
         .dropna()
         .unique()
     )
+    max_skus = (
+        df_canal.groupby("Quinzena")
+        .size()
+        .max()
+    )
 
     for quinzena in quinzenas:
 
@@ -285,6 +290,8 @@ def mostrar_produtos(df_canal, canal, negocio):
             )
         )
 
+        qtd_skus = len(produtos_q)
+
         if negocio.upper() == "CERV":
             qtd_colunas = 9
             largura_imagem = 180
@@ -292,11 +299,15 @@ def mostrar_produtos(df_canal, canal, negocio):
             qtd_colunas = 5
             largura_imagem = 180
         
-        cols = st.columns(qtd_colunas)
+        espaco = max((max_skus - qtd_skus) / 2, 0)
+
+        larguras = [espaco] + [1] * qtd_skus + [espaco]
+        
+        cols = st.columns(larguras)
 
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
-            with cols[i % qtd_colunas]:
+            with cols[i + 1]:
                 preco_de = float(row["De"])
                 preco_para = float(row["Para"])
 

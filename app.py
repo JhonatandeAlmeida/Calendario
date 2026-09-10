@@ -242,20 +242,6 @@ st.set_page_config(
 
 load_css()
 
-st.markdown(
-    """
-    <style>
-    [data-testid="stImage"] img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
 # ==================================================
 # PRODUTOS
 # ==================================================
@@ -321,10 +307,13 @@ def mostrar_produtos(df_canal, canal, negocio):
 
                 try:
 
-                    st.image(
-                        f"images/produtos_padronizados/{row['Imagem']}",
-                        width=130
-                    )
+                    c1, c2, c3 = st.columns([1, 3, 1])
+
+                    with c2:
+                        st.image(
+                            f"images/produtos_padronizados/{row['Imagem']}",
+                            use_container_width=True
+                        )
 
                 except Exception:
                     st.empty()

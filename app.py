@@ -22,10 +22,11 @@ from reportlab.lib.styles import getSampleStyleSheet
 from components.calendar import gerar_calendario
 from components.styles import load_css
 
-
 def imagem_para_base64(caminho):
     with open(caminho, "rb") as img:
-        return base64.b64encode(img.read()).decode()
+        return base64.b64encode(
+            img.read()
+        ).decode("utf-8")
 
 def padronizar_imagem(caminho_imagem):
 

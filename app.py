@@ -43,7 +43,7 @@ def padronizar_imagem(caminho_imagem):
     proporcao = min(
         tamanho / img.width,
         tamanho / img.height
-    ) * 0.5
+    ) * 0.95
     
     nova_largura = int(img.width * proporcao)
     nova_altura = int(img.height * proporcao)
@@ -326,7 +326,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                     st.markdown(
                         f"""
                         <div style="
-                            width:100%;
+                            width:80%;
                             text-align:center;
                             margin-bottom:10px;
                         ">

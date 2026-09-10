@@ -331,8 +331,11 @@ def mostrar_produtos(df_canal, canal, negocio):
                             margin-bottom:10px;
                         ">
                             <img
-                                src="data:image/png;base64,{img_base64}"
-                                width="{largura
+                                src="data:image/png;base64,{img_base64}">
+                          </div>
+                          """,	
+                        unsafe_allow_html=True>
+                	
                     )
                 
                 except Exception as e:

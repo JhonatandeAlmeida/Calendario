@@ -80,7 +80,6 @@ def load_css():
     .produto-card{
         text-align:center;
         padding:10px;
-        width:130px;
         margin-bottom:2px;
     }
 

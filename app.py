@@ -332,7 +332,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                             width: 100%;
                             margin-bottom: 10px;
                         ">
-                            <img src="data:image/png;base64,{img_base64}" style="width: 220px; max-width: 100%;">
+                            <img src="data:image/png;base64,{img_base64}" style="width: 150px; max-width: 100%;">
                         </div>
                         """,
                         unsafe_allow_html=True

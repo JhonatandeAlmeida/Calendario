@@ -334,8 +334,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                                 src="data:image/png;base64,{img_base64}">
                           </div>
                           """,	
-                        unsafe_allow_html=True>
-                	
+                        unsafe_allow_html=True                	
                     )
                 
                 except Exception as e:

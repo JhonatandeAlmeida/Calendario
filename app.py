@@ -326,15 +326,16 @@ def mostrar_produtos(df_canal, canal, negocio):
                     st.markdown(
                         f"""
                         <div style="
-                            width:80%;
-                            text-align:center;
-                            margin-bottom:10px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            margin-bottom: 10px;
                         ">
-                            <img
-                                src="data:image/png;base64,{img_base64}">
-                          </div>
-                          """,	
-                        unsafe_allow_html=True                	
+                            <img src="data:image/png;base64,{img_base64}" style="width: 220px; max-width: 100%;">
+                        </div>
+                        """,
+                        unsafe_allow_html=True
                     )
                 
                 except Exception as e:

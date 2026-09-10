@@ -329,8 +329,8 @@ def mostrar_produtos(df_canal, canal, negocio):
                             align-items:center;
                             margin-bottom:10px;
                         ">
-                            <img
-                                src="data:image/png;base64,{
+                            data:image/png;base64,{img_base64}
+                        </div>
                         """,
                         unsafe_allow_html=True
                     )

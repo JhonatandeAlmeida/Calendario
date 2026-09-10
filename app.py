@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 import os
+import base64
+
 
 from io import BytesIO
 
@@ -19,6 +21,11 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 from components.calendar import gerar_calendario
 from components.styles import load_css
+
+
+def imagem_para_base64(caminho):
+    with open(caminho, "rb") as img:
+        return base64.b64encode(img.read()).decode()
 
 def padronizar_imagem(caminho_imagem):
 
@@ -307,14 +314,27 @@ def mostrar_produtos(df_canal, canal, negocio):
 
                 try:
 
-                    c1, c2, c3 = st.columns([0.2, 3, 0.2])
-
-                    with c2:
-                        st.image(
-                            f"images/produtos_padronizados/{row['Imagem']}",
-                            width=100
-                        )
-
+                    caminho_img = (
+                        f"images/produtos_padronizados/{row['Imagem']}"
+                    )
+                
+                    img_base64 = imagem_para_base64(caminho_img)
+                
+                    st.markdown(
+                        f"""
+                        <div style="
+                            width:100%;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+                            margin-bottom:10px;
+                        ">
+                            <img
+                                src="data:image/png;base64,{
+                        """,
+                        unsafe_allow_html=True
+                    )
+                
                 except Exception:
                     st.empty()
 

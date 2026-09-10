@@ -292,12 +292,12 @@ def mostrar_produtos(df_canal, canal, negocio):
 
         qtd_skus = len(produtos_q)
 
-        if negocio.upper() == "CERV":
-            qtd_colunas = 9
-            largura_imagem = 180
-        else:
-            qtd_colunas = 5
-            largura_imagem = 180
+        # Centraliza os produtos em relação à quinzena com mais SKUs
+        offset = max((max_skus - qtd_skus) // 2, 0)
+        
+        cols = st.columns(max_skus)
+        
+        largura_imagem = 220
         
         espaco = max((max_skus - qtd_skus) / 2, 0)
 
@@ -307,7 +307,7 @@ def mostrar_produtos(df_canal, canal, negocio):
 
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
-            with cols[i + 1]:
+            with cols[i + offset]:
                 preco_de = float(row["De"])
                 preco_para = float(row["Para"])
 

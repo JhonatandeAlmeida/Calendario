@@ -296,8 +296,7 @@ def mostrar_produtos(df_canal, canal, negocio):
         offset = max((max_skus - qtd_skus) // 2, 0)
         
         cols = st.columns(max_skus)
-        
-        largura_imagem = 220
+
 
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 

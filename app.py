@@ -307,7 +307,7 @@ def mostrar_produtos(df_canal, canal, negocio):
 
                 try:
 
-                    c1, c2, c3 = st.columns([1, 3, 1])
+                    c1, c2, c3 = st.columns([0.5, 3, 0.5])
 
                     with c2:
                         st.image(

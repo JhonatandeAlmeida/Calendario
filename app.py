@@ -321,23 +321,23 @@ def mostrar_produtos(df_canal, canal, negocio):
                 
                     img_base64 = imagem_para_base64(caminho_img)
                 
+                    largura_imagem = 220
+                
                     st.markdown(
                         f"""
                         <div style="
                             width:100%;
-                            display:flex;
-                            justify-content:center;
-                            align-items:center;
+                            text-align:center;
                             margin-bottom:10px;
                         ">
-                            data:image/png;base64,{img_base64}
-                        </div>
-                        """,
-                        unsafe_allow_html=True
+                            <img
+                                src="data:image/png;base64,{img_base64}"
+                                width="{largura
                     )
                 
-                except Exception:
-                    st.empty()
+                except Exception as e:
+                    st.write(e)
+
 
 
                 st.markdown(

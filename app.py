@@ -326,7 +326,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                     st.markdown(
                         f"""
                         <div style="
-                            width:100%;
+                            width:50%;
                             text-align:center;
                             margin-bottom:10px;
                         ">

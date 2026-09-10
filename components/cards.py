@@ -14,7 +14,7 @@ for i, row in enumerate(atacado.iterrows()):
 
         st.image(
             f"images/produtos/{produto['Imagem']}",
-            width=90
+            width=130
         )
 
         st.markdown(

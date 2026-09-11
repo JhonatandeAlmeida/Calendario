@@ -505,11 +505,11 @@ meses = sorted(
     .unique()
 )
 
-colf1, colf2, esp1, colf3, colf4,  esp2, colf5, colf6, esp3, colf7, colf8 = st.columns([0.2,2,0.4,0.2,2,0.4,0.2,2,0.4,0.2,2])
+colf1, colf2, esp1, colf3, colf4,  esp2, colf5, colf6, esp3, colf7, colf8 = st.columns([0.4,2,0.4,0.4,2,0.4,0.4,2,0.4,0.4,2])
 
 with colf1:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          Mês</div>",
+        "<div style='font-size:15px;font-weight:bold;margin-bottom:5px'>          Mês</div>",
         unsafe_allow_html=True
     )
 with colf2:
@@ -523,7 +523,7 @@ with colf2:
 
 with colf3:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          Tipo</div>",
+        "<div style='font-size:15px;font-weight:bold;margin-bottom:5px'>          Tipo</div>",
         unsafe_allow_html=True
     )
 with colf4:
@@ -541,7 +541,7 @@ with colf4:
     
 with colf5:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          UF</div>",
+        "<div style='font-size:15px;font-weight:bold;margin-bottom:5px'>          UF</div>",
         unsafe_allow_html=True
     )
 with colf6:
@@ -564,7 +564,7 @@ with colf6:
     
 with colf7:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>     Canal</div>",
+        "<div style='font-size:15px;font-weight:bold;margin-bottom:5px'>     Canal</div>",
         unsafe_allow_html=True
     )
 with colf8:

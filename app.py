@@ -546,7 +546,7 @@ with colf3:
     )
     regional = st.selectbox(
         "Regional",
-        regionais,,
+        regionais,
         label_visibility="collapsed",
         index=regionais.index(regional_padrao)
         if regional_padrao in regionais else 0

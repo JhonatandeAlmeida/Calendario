@@ -502,7 +502,7 @@ meses = sorted(
     prod_df["Mes"]
     .dropna()
     .astype(str)
-    .unique()
+    .unique(),
     key=lambda x: ordem_meses[x]
 )
 

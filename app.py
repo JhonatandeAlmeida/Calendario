@@ -507,6 +507,10 @@ meses = sorted(
 colf1, colf2, colf3, colf4 = st.columns(4)
 
 with colf1:
+    st.markdown(
+        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>Mês</div>",
+        unsafe_allow_html=True
+    )
 
     mes = st.selectbox(
         "Mês",

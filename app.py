@@ -505,7 +505,7 @@ meses = sorted(
     .unique()
 )
 
-colf1, colf2, colf3, colf4, colf5, colf6, colf7, colf8 = st.columns([1,2,1,2,1,2,1,2])
+colf1, colf2, colf3, colf4, colf5, colf6, colf7, colf8 = st.columns([0.5,2,0.5,2,0.5,2,0.5,2])
 
 with colf1:
     st.markdown(

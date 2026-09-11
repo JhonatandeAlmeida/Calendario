@@ -504,13 +504,6 @@ meses = sorted(
     .unique()
 )
 
-negocios = sorted(
-    prod_df["Tipo"]
-    .dropna()
-    .astype(str)
-    .unique()
-)
-
 regionais = sorted(
     prod_df.loc[
         prod_df["Tipo"] == negocio,
@@ -553,6 +546,12 @@ with colf2:
         if regional_padrao in regionais else 0
     )
 with colf3:
+    negocios = sorted(
+        prod_df["Tipo"]
+        .dropna()
+        .astype(str)
+        .unique()
+    )
     negocio = st.selectbox(
         "Tipo",
         negocios

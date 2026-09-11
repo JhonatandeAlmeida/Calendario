@@ -567,7 +567,7 @@ with colf4:
     )
     canal = st.radio(
         "Canal",
-        canais,,
+        canais,
         label_visibility="collapsed",
         horizontal=True
     )

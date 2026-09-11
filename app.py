@@ -511,10 +511,6 @@ negocios = sorted(
     .unique()
 )
 
-negocio = st.selectbox(
-    "Tipo",
-    negocios
-)
 regionais = sorted(
     prod_df.loc[
         prod_df["Tipo"] == negocio,
@@ -525,7 +521,19 @@ regionais = sorted(
     .unique()
 )
 
-colf1, colf2 = st.columns(2)
+canais = sorted(
+    prod_df.loc[
+        (prod_df["Tipo"] == negocio)
+        &
+        (prod_df["Regional"] == regional),
+        "Canal"
+    ]
+    .dropna()
+    .astype(str)
+    .unique()
+)
+
+colf1, colf2, colf3, colf4 = st.columns(4)
 
 with colf1:
 
@@ -544,23 +552,17 @@ with colf2:
         index=regionais.index(regional_padrao)
         if regional_padrao in regionais else 0
     )
-canais = sorted(
-    prod_df.loc[
-        (prod_df["Tipo"] == negocio)
-        &
-        (prod_df["Regional"] == regional),
-        "Canal"
-    ]
-    .dropna()
-    .astype(str)
-    .unique()
-)
-
-canal = st.radio(
-    "Canal",
-    canais,
-    horizontal=True
-)
+with colf3:
+    negocio = st.selectbox(
+        "Tipo",
+        negocios
+    )
+with colf4:
+    canal = st.radio(
+        "Canal",
+        canais,
+        horizontal=True
+    )
 # ==================================================
 # FILTROS DE DADOS
 # ==================================================

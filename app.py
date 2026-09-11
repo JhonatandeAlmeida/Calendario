@@ -505,14 +505,14 @@ meses = sorted(
     .unique()
 )
 
-colf1, colf2, colf3, colf4 = st.columns(4)
+colf1, colf2, colf3, colf4, colf5, colf6, colf7, colf8 = st.columns(8)
 
 with colf1:
     st.markdown(
         "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          Mês</div>",
         unsafe_allow_html=True
     )
-
+with colf2:
     mes = st.selectbox(
         "Mês",
         meses,
@@ -521,11 +521,12 @@ with colf1:
         if mes_padrao in meses else 0
     )
 
-with colf2:
+with colf3:
     st.markdown(
         "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          Tipo</div>",
         unsafe_allow_html=True
     )
+with colf4:
     negocios = sorted(
         prod_df["Tipo"]
         .dropna()
@@ -538,11 +539,12 @@ with colf2:
         label_visibility="collapsed",
     )
     
-with colf3:
+with colf5:
     st.markdown(
         "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          UF</div>",
         unsafe_allow_html=True
-    )    
+    )
+with colf6:
     regionais = sorted(
         prod_df.loc[
             prod_df["Tipo"] == negocio,
@@ -560,11 +562,12 @@ with colf3:
         if regional_padrao in regionais else 0
     )
     
-with colf4:
+with colf7:
     st.markdown(
         "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>     Canal</div>",
         unsafe_allow_html=True
     )
+with colf8:
     
     canais = sorted(
         prod_df.loc[

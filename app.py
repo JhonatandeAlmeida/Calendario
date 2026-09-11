@@ -515,6 +515,7 @@ with colf1:
     mes = st.selectbox(
         "Mês",
         meses,
+        label_visibility="collapsed",
         index=meses.index(mes_padrao)
         if mes_padrao in meses else 0
     )
@@ -528,7 +529,8 @@ with colf2:
     )
     negocio = st.selectbox(
         "Tipo",
-        negocios
+        negocios,
+        label_visibility="collapsed",
     )
     
 with colf3:
@@ -544,7 +546,8 @@ with colf3:
     )
     regional = st.selectbox(
         "Regional",
-        regionais,
+        regionais,,
+        label_visibility="collapsed",
         index=regionais.index(regional_padrao)
         if regional_padrao in regionais else 0
     )
@@ -564,7 +567,8 @@ with colf4:
     )
     canal = st.radio(
         "Canal",
-        canais,
+        canais,,
+        label_visibility="collapsed",
         horizontal=True
     )
 # ==================================================

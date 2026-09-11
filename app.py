@@ -504,16 +504,6 @@ meses = sorted(
     .unique()
 )
 
-regionais = sorted(
-    prod_df.loc[
-        prod_df["Tipo"] == negocio,
-        "Regional"
-    ]
-    .dropna()
-    .astype(str)
-    .unique()
-)
-
 canais = sorted(
     prod_df.loc[
         (prod_df["Tipo"] == negocio)
@@ -538,14 +528,6 @@ with colf1:
     )
 
 with colf2:
-
-    regional = st.selectbox(
-        "Regional",
-        regionais,
-        index=regionais.index(regional_padrao)
-        if regional_padrao in regionais else 0
-    )
-with colf3:
     negocios = sorted(
         prod_df["Tipo"]
         .dropna()
@@ -556,6 +538,25 @@ with colf3:
         "Tipo",
         negocios
     )
+    
+with colf3:
+    
+    regionais = sorted(
+        prod_df.loc[
+            prod_df["Tipo"] == negocio,
+            "Regional"
+        ]
+        .dropna()
+        .astype(str)
+        .unique()
+    )
+    regional = st.selectbox(
+        "Regional",
+        regionais,
+        index=regionais.index(regional_padrao)
+        if regional_padrao in regionais else 0
+    )
+    
 with colf4:
     canal = st.radio(
         "Canal",

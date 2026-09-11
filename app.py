@@ -503,6 +503,7 @@ meses = sorted(
     .dropna()
     .astype(str)
     .unique()
+    key=lambda x: ordem_meses[x]
 )
 
 colf1, colf2, esp1, colf3, colf4,  esp2, colf5, colf6, esp3, colf7, colf8 = st.columns([0.4,2,0.4,0.4,2,0.4,0.4,2,0.4,0.4,2])

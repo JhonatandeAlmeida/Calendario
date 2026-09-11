@@ -497,31 +497,6 @@ regional_padrao = config.get(
 # FILTROS
 # ==================================================
 
-st.markdown("""
-<style>
-
-/* Label dos filtros */
-.stSelectbox label,
-.stRadio label {
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    color: #000 !important;
-}
-
-/* Valor selecionado nos selects */
-div[data-baseweb="select"] > div {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-}
-
-/* Opções do rádio */
-div[role="radiogroup"] label {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
 
 meses = sorted(
     prod_df["Mes"]
@@ -534,7 +509,7 @@ colf1, colf2, colf3, colf4 = st.columns(4)
 
 with colf1:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>Mês</div>",
+        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          Mês</div>",
         unsafe_allow_html=True
     )
 
@@ -548,7 +523,7 @@ with colf1:
 
 with colf2:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>Tipo</div>",
+        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          Tipo</div>",
         unsafe_allow_html=True
     )
     negocios = sorted(
@@ -565,7 +540,7 @@ with colf2:
     
 with colf3:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>UF</div>",
+        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>          UF</div>",
         unsafe_allow_html=True
     )    
     regionais = sorted(
@@ -587,7 +562,7 @@ with colf3:
     
 with colf4:
     st.markdown(
-        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>Canal</div>",
+        "<div style='font-size:20px;font-weight:bold;margin-bottom:5px'>     Canal</div>",
         unsafe_allow_html=True
     )
     

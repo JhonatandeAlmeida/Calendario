@@ -498,13 +498,29 @@ regional_padrao = config.get(
 # ==================================================
 
 
+meses_mapa = {
+    "Janeiro": 1,
+    "Fevereiro": 2,
+    "Março": 3,
+    "Abril": 4,
+    "Maio": 5,
+    "Junho": 6,
+    "Julho": 7,
+    "Agosto": 8,
+    "Setembro": 9,
+    "Outubro": 10,
+    "Novembro": 11,
+    "Dezembro": 12
+}
+
 meses = sorted(
     prod_df["Mes"]
     .dropna()
     .astype(str)
     .unique(),
-    key=lambda x: ordem_meses[x]
+    key=lambda x: meses_mapa.get(x, 99)
 )
+
 
 colf1, colf2, esp1, colf3, colf4,  esp2, colf5, colf6, esp3, colf7, colf8 = st.columns([0.4,2,0.4,0.4,2,0.4,0.4,2,0.4,0.4,2])
 
@@ -619,21 +635,6 @@ mecanica_mes = mec_df[
 cal_df["Data"] = pd.to_datetime(
     cal_df["Data"]
 )
-
-meses_mapa = {
-    "Janeiro": 1,
-    "Fevereiro": 2,
-    "Março": 3,
-    "Abril": 4,
-    "Maio": 5,
-    "Junho": 6,
-    "Julho": 7,
-    "Agosto": 8,
-    "Setembro": 9,
-    "Outubro": 10,
-    "Novembro": 11,
-    "Dezembro": 12
-}
 
 mes_numero = meses_mapa.get(
     mes,

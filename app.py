@@ -504,18 +504,6 @@ meses = sorted(
     .unique()
 )
 
-canais = sorted(
-    prod_df.loc[
-        (prod_df["Tipo"] == negocio)
-        &
-        (prod_df["Regional"] == regional),
-        "Canal"
-    ]
-    .dropna()
-    .astype(str)
-    .unique()
-)
-
 colf1, colf2, colf3, colf4 = st.columns(4)
 
 with colf1:
@@ -558,6 +546,18 @@ with colf3:
     )
     
 with colf4:
+    
+    canais = sorted(
+        prod_df.loc[
+            (prod_df["Tipo"] == negocio)
+            &
+            (prod_df["Regional"] == regional),
+            "Canal"
+        ]
+        .dropna()
+        .astype(str)
+        .unique()
+    )
     canal = st.radio(
         "Canal",
         canais,

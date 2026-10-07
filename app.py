@@ -730,6 +730,13 @@ with col_esquerda:
         .str.upper()
         == "SELL OUT"
     ]
+
+    merca = mecanica_mes[
+        mecanica_mes["Tipo"]
+        .astype(str)
+        .str.upper()
+        == "MERCAPROMO"
+    ]
     
     html = "<div class='mecanica-box'>"
     
@@ -757,6 +764,20 @@ with col_esquerda:
         """
     
         for _, row in sell_out.iterrows():
+            html += f"<li>{row['Texto']}</li>"
+    
+        html += "</ul>"
+
+    if not merca.empty:
+    
+        html += """
+        <div class='mecanica-subtitle'>
+            MERCAPROMO
+        </div>
+        <ul class='mecanica-lista'>
+        """
+    
+        for _, row in sell_in.iterrows():
             html += f"<li>{row['Texto']}</li>"
     
         html += "</ul>"

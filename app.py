@@ -208,12 +208,20 @@ def gerar_pdf(
 
             for _, row in produtos_q.iterrows():
 
-                dados.append(
-                    [
-                        str(row["SKU"]),
-                        f"R$ {row['De']:.2f}",
-                        f"R$ {row['Para']:.2f}"
-                    ]
+                if negocio == "MERCAPROMO":
+                    dados.append(
+                        [
+                            str(row["SKU"]),
+                            f"R$ {row['De']}",
+                            f"R$ {row['Para']}"
+                        ]
+                else:
+                        dados.append(
+                        [
+                            str(row["SKU"]),
+                            f"R$ {row['De']:.2f}",
+                            f"R$ {row['Para']:.2f}"
+                        ]
                 )
 
             tabela = Table(

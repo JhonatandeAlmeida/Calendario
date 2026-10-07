@@ -297,15 +297,22 @@ def mostrar_produtos(df_canal, canal, negocio):
             unsafe_allow_html=True
         )
 
-        produtos_q = (
-                df_canal[
-                    df_canal["Quinzena"] == quinzena
-                ]
-                .sort_values(
-                    by="Para",
-                    ascending=True
+        if negocio == "MERCAPROMO":
+            produtos_q = (
+                    df_canal[
+                        df_canal["Quinzena"] == quinzena
+                    ]
                 )
-            )
+        else:
+            produtos_q = (
+                    df_canal[
+                        df_canal["Quinzena"] == quinzena
+                    ]
+                    .sort_values(
+                        by="Para",
+                        ascending=True
+                    )
+                )
 
         qtd_skus = len(produtos_q)
 

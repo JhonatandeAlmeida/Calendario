@@ -357,14 +357,15 @@ def mostrar_produtos(df_canal, canal, negocio):
                     unsafe_allow_html=True
                 )
 
-                st.markdown(
-                    f"""
-                    <div class="delta-price">
-                        ↓ R$ {delta_rs:.2f}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                if not negocio == "MERCAPROMO":
+                    st.markdown(
+                        f"""
+                        <div class="delta-price">
+                            ↓ R$ {delta_rs:.2f}
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
 
                 st.markdown(
                     f"""

@@ -297,11 +297,11 @@ def mostrar_produtos(df_canal, canal, negocio):
             unsafe_allow_html=True
         )
 
-        if not negocio == "MERCAPROMO":
-            produtos_q = (
+        produtos_q = (
                 df_canal[
                     df_canal["Quinzena"] == quinzena
                 ]
+             if not negocio == "MERCAPROMO":
                 .sort_values(
                     by="Para",
                     ascending=True

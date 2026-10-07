@@ -777,7 +777,7 @@ with col_esquerda:
         <ul class='mecanica-lista'>
         """
     
-        for _, row in sell_in.iterrows():
+        for _, row in merca.iterrows():
             html += f"<li>{row['Texto']}</li>"
     
         html += "</ul>"

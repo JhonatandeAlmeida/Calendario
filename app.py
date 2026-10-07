@@ -366,24 +366,44 @@ def mostrar_produtos(df_canal, canal, negocio):
                         """,
                         unsafe_allow_html=True
                     )
+                if negocio == "MERCAPROMO":
+                    st.markdown(
+                        f"""
+                        <div class="old-price">
+                            {preco_de}
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+    
+                    st.markdown(
+                        f"""
+                        <div class="new-price">
+                            {preco_para}
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
 
-                st.markdown(
-                    f"""
-                    <div class="old-price">
-                        R$ {preco_de:.2f}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-                st.markdown(
-                    f"""
-                    <div class="new-price">
-                        R$ {preco_para:.2f}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                else:
+                    st.markdown(
+                        f"""
+                        <div class="old-price">
+                            R$ {preco_de:.2f}
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+    
+                    st.markdown(
+                        f"""
+                        <div class="new-price">
+                            R$ {preco_para:.2f}
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+                
                 st.markdown(
                     "<div style='height:20px'></div>",
                     unsafe_allow_html=True

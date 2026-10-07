@@ -308,10 +308,15 @@ def mostrar_produtos(df_canal, canal, negocio):
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
             with cols[i + offset]:
-                preco_de = float(row["De"])
-                preco_para = float(row["Para"])
-
-                delta_rs = preco_de - preco_para
+                if negocio == "MERCAPROMO":
+                    preco_de = row["De"]
+                    preco_para = row["Para"]
+                    
+                else:
+                    preco_de = float(row["De"])
+                    preco_para = float(row["Para"])
+    
+                    delta_rs = preco_de - preco_para
 
                 try:
 

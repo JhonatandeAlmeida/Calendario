@@ -645,6 +645,8 @@ cal_mes = cal_df[
     (cal_df["Data"].dt.month == mes_numero)
     &
     (cal_df["Data"].dt.year == ano)
+    &
+    (cal_df["SKU"].astype(str) == negocio)
 ]
 
 eventos = {}

@@ -215,6 +215,8 @@ def gerar_pdf(
                             f"R$ {row['De']}",
                             f"R$ {row['Para']}"
                         ]
+
+                    )
                 else:
                         dados.append(
                         [
@@ -222,7 +224,7 @@ def gerar_pdf(
                             f"R$ {row['De']:.2f}",
                             f"R$ {row['Para']:.2f}"
                         ]
-                )
+                    )
 
             tabela = Table(
                 dados,

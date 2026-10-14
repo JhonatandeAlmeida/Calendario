@@ -203,7 +203,7 @@ def gerar_pdf(
             ]
 
             produtos_q = df_canal[
-                df_canal["Quinzena"] == quinzena
+                df_canal["Quinzena"].astype(str) == str(quinzena)
             ]
 
             for _, row in produtos_q.iterrows():

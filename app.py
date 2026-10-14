@@ -278,6 +278,7 @@ def mostrar_produtos(df_canal, canal, negocio):
     quinzenas = sorted(
         df_canal["Quinzena"]
         .dropna()
+        .astype(str)
         .unique()
     )
     max_skus = (

@@ -289,7 +289,7 @@ def mostrar_produtos(df_canal, canal, negocio):
 
     for quinzena in quinzenas:
 
-        if quinzenas = "PP":
+        if quinzenas == "PP":
             st.markdown(
                 f"""
                 <div class="quinzena-title">

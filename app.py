@@ -192,12 +192,20 @@ def gerar_pdf(
     
         for quinzena in sorted(quinzenas):
 
-            elementos.append(
-                Paragraph(
-                    f"<b>{quinzena}ª QUINZENA</b>",
-                    styles["Heading3"]
+            if quinzena == "PP":
+                elementos.append(
+                    Paragraph(
+                        f"<b>POWER PACKS</b>",
+                        styles["Heading3"]
+                    )
                 )
-            )
+            else:
+                elementos.append(
+                    Paragraph(
+                        f"<b>{quinzena}ª QUINZENA</b>",
+                        styles["Heading3"]
+                    )
+                )
 
             dados = [
                 [

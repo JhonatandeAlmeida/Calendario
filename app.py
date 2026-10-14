@@ -184,10 +184,11 @@ def gerar_pdf(
         ]
         
         quinzenas = sorted(
-        df_canal["Quinzena"]
-        .dropna()
-        .astype(str)
-        .unique()
+            df_canal["Quinzena"]
+            .dropna()
+            .astype(str)
+            .unique()
+        )
     
         for quinzena in sorted(quinzenas):
 

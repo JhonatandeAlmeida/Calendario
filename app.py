@@ -301,13 +301,13 @@ def mostrar_produtos(df_canal, canal, negocio):
         if negocio == "MERCAPROMO":
             produtos_q = (
                     df_canal[
-                        df_canal["Quinzena"] == quinzena
+                        df_canal["Quinzena"].astype(str) == str(quinzena)
                     ]
                 )
         else:
             produtos_q = (
                     df_canal[
-                        df_canal["Quinzena"] == quinzena
+                        df_canal["Quinzena"].astype(str) == str(quinzena)
                     ]
                     .sort_values(
                         by="Para",

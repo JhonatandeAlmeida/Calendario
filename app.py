@@ -182,10 +182,14 @@ def gerar_pdf(
         df_canal = produtos[
             produtos["Canal"] == canal
         ]
-
-        for quinzena in sorted(
-            df_canal["Quinzena"].unique()
-        ):
+        
+        quinzenas = sorted(
+        df_canal["Quinzena"]
+        .dropna()
+        .astype(str)
+        .unique()
+    
+        for quinzena in sorted(quinzenas):
 
             elementos.append(
                 Paragraph(
@@ -298,7 +302,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                 """,
                 unsafe_allow_html=True
             )
-        else
+        else:
             st.markdown(
             f"""
             <div class="quinzena-title">

@@ -289,7 +289,17 @@ def mostrar_produtos(df_canal, canal, negocio):
 
     for quinzena in quinzenas:
 
-        st.markdown(
+        if quinzenas = "PP":
+            st.markdown(
+                f"""
+                <div class="quinzena-title">
+                    POWER PACKS
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+        else
+            st.markdown(
             f"""
             <div class="quinzena-title">
                 {quinzena}ª QUINZENA

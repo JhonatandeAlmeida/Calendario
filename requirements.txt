@@ -5,3 +5,4 @@ streamlit-calendar
 Pillow
 reportlab
 streamlit-javascript
+requests

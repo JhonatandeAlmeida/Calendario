@@ -75,7 +75,10 @@ def gerar_pdf(
     ano,
     mecanica_mes,
     produtos,
-    logo
+    logo,
+    canal,
+    negocio,
+    regional
 ):
 
     buffer = BytesIO()
@@ -86,33 +89,41 @@ def gerar_pdf(
 
     elementos = []
 
-    # Título
-
-    elementos.append(
-        Paragraph(
-            f"<b>{titulo} | {mes} {ano}</b>",
-            styles["Title"]
-        )
-    )
-
-    elementos.append(Spacer(1, 10))
-
-    # Logo
+        # Logo
 
     try:
+        caminho_logo = f"images/{logo}"
+        img = Image.open(caminho_logo)
+        largura_original, altura_original = img.size
+        largura_desejada = 3* cm
+
+        altura_proporcional = (
+            largura_desejada * altura_original / largura_original
+        )
 
         elementos.append(
-            Image(
-                f"images/{logo}",
-                width=3*cm,
-                height=3*cm
+            PdfImage(
+                caminho_logo,
+                width=largura_desejada,
+                height=altura_proporcional
             )
         )
 
     except:
         pass
 
-    elementos.append(Spacer(1, 10))
+    elementos.append(Spacer(1, 5))
+
+    # Título
+
+    elementos.append(
+        Paragraph(
+            f"<b>{titulo} | {canal} {regional} | {mes} {ano} </b>",
+            styles["Title"]
+        )
+    )
+
+    elementos.append(Spacer(1, 5))
 
     # Mecânica
 
@@ -171,96 +182,83 @@ def gerar_pdf(
 
     # Produtos
 
-    for canal in produtos["Canal"].dropna().unique():
+    df_canal = produtos.copy()
+    
+    quinzenas = sorted(
+        df_canal["Quinzena"]
+        .dropna()
+        .astype(str)
+        .unique()
+    )
+    
+    for quinzena in sorted(quinzenas):
 
+        titulo_quinzena = (
+            "POWER PACKS"
+            if quinzena == "PP"
+            else f"{quinzena}ª QUINZENA"
+        )
+        
         elementos.append(
             Paragraph(
-                f"<b>{canal}</b>",
-                styles["Heading2"]
+                f"<b>{titulo_quinzena}</b>",
+                styles["Heading3"]
             )
         )
-
-        df_canal = produtos[
-            produtos["Canal"] == canal
+      
+        dados = [
+            [
+                "SKU",
+                "DE",
+                "POR"
+            ]
         ]
-        
-        quinzenas = sorted(
-            df_canal["Quinzena"]
-            .dropna()
-            .astype(str)
-            .unique()
-        )
-    
-        for quinzena in sorted(quinzenas):
 
-            if quinzena == "PP":
-                elementos.append(
-                    Paragraph(
-                        f"<b>POWER PACKS</b>",
-                        styles["Heading3"]
-                    )
+        produtos_q = df_canal[
+            df_canal["Quinzena"].astype(str) == str(quinzena)
+        ]
+
+        for _, row in produtos_q.iterrows():
+
+            if negocio == "MERCAPROMO":
+                dados.append(
+                    [
+                        str(row["SKU"]),
+                        f"R$ {row['De']}",
+                        f"R$ {row['Para']}"
+                    ]
+
                 )
             else:
-                elementos.append(
-                    Paragraph(
-                        f"<b>{quinzena}ª QUINZENA</b>",
-                        styles["Heading3"]
-                    )
+                    dados.append(
+                    [
+                        str(row["SKU"]),
+                        f"R$ {row['De']:.2f}",
+                        f"R$ {row['Para']:.2f}"
+                    ]
                 )
 
-            dados = [
-                [
-                    "SKU",
-                    "DE",
-                    "PARA"
-                ]
-            ]
+        tabela = Table(
+            dados,
+            colWidths=[6*cm, 3*cm, 3*cm]
+        )
 
-            produtos_q = df_canal[
-                df_canal["Quinzena"].astype(str) == str(quinzena)
-            ]
+        tabela.setStyle(
+            TableStyle([
+                ("BACKGROUND", (0,0), (-1,0), colors.grey),
+                ("TEXTCOLOR", (0,0), (-1,0), colors.white),
+                ("GRID", (0,0), (-1,-1), 1, colors.black),
+                ("ALIGN", (0,0), (-1,-1), "CENTER"),
+            ])
+        )
 
-            for _, row in produtos_q.iterrows():
-
-                if negocio == "MERCAPROMO":
-                    dados.append(
-                        [
-                            str(row["SKU"]),
-                            f"R$ {row['De']}",
-                            f"R$ {row['Para']}"
-                        ]
-
-                    )
-                else:
-                        dados.append(
-                        [
-                            str(row["SKU"]),
-                            f"R$ {row['De']:.2f}",
-                            f"R$ {row['Para']:.2f}"
-                        ]
-                    )
-
-            tabela = Table(
-                dados,
-                colWidths=[6*cm, 3*cm, 3*cm]
-            )
-
-            tabela.setStyle(
-                TableStyle([
-                    ("BACKGROUND", (0,0), (-1,0), colors.grey),
-                    ("TEXTCOLOR", (0,0), (-1,0), colors.white),
-                    ("GRID", (0,0), (-1,-1), 1, colors.black),
-                    ("ALIGN", (0,0), (-1,-1), "CENTER"),
-                ])
-            )
-
-            elementos.append(tabela)
-            elementos.append(Spacer(1, 10))
+        elementos.append(tabela)
+        elementos.append(Spacer(1, 10))
 
     doc.build(elementos)
-
+    
     buffer.seek(0)
-
+    
     return buffer
 # ==================================================
 # CONFIGURAÇÃO
@@ -887,20 +885,21 @@ with col_direita:
             negocio
         )
 
+pdf_file = gerar_pdf(
+    titulo=titulo,
+    mes=mes,
+    ano=ano,
+    mecanica_mes=mecanica_mes,
+    produtos=produtos,
+    logo=logo,
+    canal=canal,
+    negocio=negocio,
+    regional=regional
+)
 
-if st.button("📄 Gerar PDF"):
-    pdf_file = gerar_pdf(
-        titulo=titulo,
-        mes=mes,
-        ano=ano,
-        mecanica_mes=mecanica_mes,
-        produtos=produtos,
-        logo=logo
-    )
-    
-    st.download_button(
-        "📄 Exportar PDF",
-        data=pdf_file,
-        file_name=f"Calendario_{mes}_{ano}.pdf",
-        mime="application/pdf"
-    )
+st.download_button(
+    "📄 Exportar PDF",
+    data=pdf_file,
+    file_name=f"Calendario_{canal}_{regional}_{mes}_{ano}.pdf",
+    mime="application/pdf"
+)

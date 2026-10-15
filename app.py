@@ -874,18 +874,19 @@ with col_direita:
         )
 
 
-pdf_file = gerar_pdf(
-    titulo=titulo,
-    mes=mes,
-    ano=ano,
-    mecanica_mes=mecanica_mes,
-    produtos=produtos,
-    logo=logo
-)
-
-st.download_button(
-    "📄 Exportar PDF",
-    data=pdf_file,
-    file_name=f"Calendario_{mes}_{ano}.pdf",
-    mime="application/pdf"
-)
+if st.button("📄 Gerar PDF"):
+    pdf_file = gerar_pdf(
+        titulo=titulo,
+        mes=mes,
+        ano=ano,
+        mecanica_mes=mecanica_mes,
+        produtos=produtos,
+        logo=logo
+    )
+    
+    st.download_button(
+        "📄 Exportar PDF",
+        data=pdf_file,
+        file_name=f"Calendario_{mes}_{ano}.pdf",
+        mime="application/pdf"
+    )

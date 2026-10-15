@@ -101,28 +101,43 @@ def gerar_pdf(
             largura_desejada * altura_original / largura_original
         )
 
-        elementos.append(
-            PdfImage(
+        logo_pdf = PdfImage(
                 caminho_logo,
                 width=largura_desejada,
                 height=altura_proporcional
-            )
-        )
+                )
+        
 
     except:
         pass
 
+    elementos.append(logo_pdf)
     elementos.append(Spacer(1, 5))
 
     # Título
 
-    elementos.append(
-        Paragraph(
-            f"<b>{titulo} | {canal} {regional} | {mes} {ano} </b>",
-            styles["Title"]
-        )
+    cabecalho = Table(
+        [[
+            f"{titulo} | {canal} _ {regional} | {mes} {ano}"
+        ]],
+        colWidths=[18*cm]
     )
-
+    
+    cabecalho.setStyle(
+        TableStyle([
+            ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#005CB9")),
+            ("TEXTCOLOR", (0, 0), (-1, -1), colors.white),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("FONTNAME", (0, 0), (-1, -1), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 18),
+            ("TOPPADDING", (0, 0), (-1, -1), 8),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ("BOX", (0, 0), (-1, -1), 0, colors.white),
+        ])
+    )
+    
+    elementos.append(cabecalho)
     elementos.append(Spacer(1, 5))
 
     # Mecânica
@@ -160,7 +175,7 @@ def gerar_pdf(
             )
         )
 
-    elementos.append(Spacer(1, 10))
+    elementos.append(Spacer(1, 5))
 
     elementos.append(
         Paragraph(
@@ -178,7 +193,7 @@ def gerar_pdf(
             )
         )
 
-    elementos.append(Spacer(1, 20))
+    elementos.append(Spacer(1, 5))
 
     # Produtos
 
@@ -242,18 +257,24 @@ def gerar_pdf(
             dados,
             colWidths=[6*cm, 3*cm, 3*cm]
         )
-
+        estilo = [
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#005CB9")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ]
+        
+        for i in range(1, len(dados)):
+            if i % 2 == 0:
+                estilo.append(
+                    ("BACKGROUND", (0, i), (-1, i), colors.whitesmoke)
+                )
+        
         tabela.setStyle(
-            TableStyle([
-                ("BACKGROUND", (0,0), (-1,0), colors.grey),
-                ("TEXTCOLOR", (0,0), (-1,0), colors.white),
-                ("GRID", (0,0), (-1,-1), 1, colors.black),
-                ("ALIGN", (0,0), (-1,-1), "CENTER"),
-            ])
+            TableStyle(estilo)
         )
 
         elementos.append(tabela)
-        elementos.append(Spacer(1, 10))
+        elementos.append(Spacer(1, 5))
 
     doc.build(elementos)
     

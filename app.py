@@ -3,7 +3,6 @@ import pandas as pd
 from PIL import Image
 import os
 import base64
-import requests
 
 
 from io import BytesIO
@@ -23,6 +22,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from components.calendar import gerar_calendario
 from components.styles import load_css
 
+@st.cache_data
 def imagem_para_base64(caminho):
     with open(caminho, "rb") as img:
         return base64.b64encode(
@@ -458,7 +458,8 @@ def mostrar_produtos(df_canal, canal, negocio):
 
 ARQUIVO = "data/calendario_promocional.xlsx"
 
-try:
+@st.cache_data(ttl=300)
+def carregar_planilha():
 
     config_df = pd.read_excel(
         ARQUIVO,
@@ -479,6 +480,17 @@ try:
         ARQUIVO,
         sheet_name="PRODUTOS"
     )
+
+    return (
+        config_df,
+        cal_df,
+        mec_df,
+        prod_df
+    )
+
+try:
+
+    config_df, cal_df, mec_df, prod_df = carregar_planilha()
 
 except Exception as e:
 
@@ -508,7 +520,9 @@ for arquivo in os.listdir(PASTA_ORIGINAL):
         PASTA_PADRONIZADA,
         arquivo
     )
-
+    if os.path.exists(destino):
+        continue
+        
     try:
 
         imagem = padronizar_imagem(

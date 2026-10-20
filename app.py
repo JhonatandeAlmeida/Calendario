@@ -424,8 +424,18 @@ def mostrar_produtos(df_canal, canal, negocio):
                     unsafe_allow_html=True
                 )
 
-                if not (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
+                if (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
                     st.markdown(
+                        f"""
+                        <div class="delta-nok">
+                           -
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+
+                else:
+                     st.markdown(
                         f"""
                         <div class="delta-price">
                             ↓ R$ {delta_rs:.2f}
@@ -433,6 +443,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                         """,
                         unsafe_allow_html=True
                     )
+                    
                 if (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
                     st.markdown(
                         f"""

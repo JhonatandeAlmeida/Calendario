@@ -210,7 +210,7 @@ def gerar_pdf(
 
         titulo_quinzena = (
             f"{quinzena}ª QUINZENA"
-            if (quinzena == 1 or quinzena == 2)
+            if (quinzena == "1" or quinzena == "2")
             else f"{quinzena}"
         )
         
@@ -322,7 +322,7 @@ def mostrar_produtos(df_canal, canal, negocio):
 
     for quinzena in quinzenas:
 
-        if (quinzena == 1 or quinzena == 2):
+        if (quinzena == "1" or quinzena == "2"):
             st.markdown(
             f"""
             <div class="quinzena-title">

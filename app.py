@@ -235,7 +235,7 @@ def gerar_pdf(
 
         for _, row in produtos_q.iterrows():
 
-            if negocio == "MERCAPROMO":
+            if (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
                 dados.append(
                     [
                         str(row["SKU"]),
@@ -369,7 +369,7 @@ def mostrar_produtos(df_canal, canal, negocio):
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
             with cols[i + offset]:
-                if negocio == "MERCAPROMO":
+                if (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
                     preco_de = row["De"]
                     preco_para = row["Para"]
                     
@@ -418,7 +418,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                     unsafe_allow_html=True
                 )
 
-                if not negocio == "MERCAPROMO":
+                if not (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
                     st.markdown(
                         f"""
                         <div class="delta-price">
@@ -427,7 +427,7 @@ def mostrar_produtos(df_canal, canal, negocio):
                         """,
                         unsafe_allow_html=True
                     )
-                if negocio == "MERCAPROMO":
+                if (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
                     st.markdown(
                         f"""
                         <div class="old-price">

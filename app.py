@@ -375,7 +375,7 @@ def mostrar_produtos(df_canal, canal, negocio):
         for i, (_, row) in enumerate(produtos_q.iterrows()):
 
             with cols[i + offset]:
-                if negocio == "MERCAPROMO" :
+                if (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
                     preco_de = row["De"]
                     preco_para = row["Para"]
                     

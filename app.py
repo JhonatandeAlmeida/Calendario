@@ -348,15 +348,21 @@ def mostrar_produtos(df_canal, canal, negocio):
                     ]
                 )
         else:
-            produtos_q = (
-                    df_canal[
-                        df_canal["Quinzena"].astype(str) == str(quinzena)
-                    ]
-                    .sort_values(
-                        by="Para",
-                        ascending=True
-                    )
-                )
+            df_temp = df_canal[
+                df_canal["Quinzena"].astype(str) == str(quinzena)
+            ].copy()
+            
+            df_temp["Para_Ordenacao"] = pd.to_numeric(
+                df_temp["Para"],
+                errors="coerce"
+            )
+            
+            produtos_q = df_temp.sort_values(
+                by="Para_Ordenacao",
+                ascending=True,
+                na_position="last"
+            )
+            
 
         qtd_skus = len(produtos_q)
 

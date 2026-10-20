@@ -209,9 +209,9 @@ def gerar_pdf(
     for quinzena in sorted(quinzenas):
 
         titulo_quinzena = (
-            "POWER PACKS"
-            if quinzena == "PP"
-            else f"{quinzena}ª QUINZENA"
+            f"{quinzena}ª QUINZENA"
+            if (quinzena == 1 or quinzena == 2)
+            else f"{quinzena}"
         )
         
         elementos.append(

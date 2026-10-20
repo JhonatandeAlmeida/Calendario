@@ -22,7 +22,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from components.calendar import gerar_calendario
 from components.styles import load_css
 
-@st.cache_data
+@st.cache_data(ttl=30)
 def imagem_para_base64(caminho):
     with open(caminho, "rb") as img:
         return base64.b64encode(
@@ -494,7 +494,7 @@ def mostrar_produtos(df_canal, canal, negocio):
 
 ARQUIVO = "data/calendario_promocional.xlsx"
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=30)
 def carregar_planilha():
 
     config_df = pd.read_excel(

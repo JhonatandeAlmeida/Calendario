@@ -341,7 +341,7 @@ def mostrar_produtos(df_canal, canal, negocio):
             unsafe_allow_html=True
         )
 
-        if negocio == "MERCAPROMO":
+        if (negocio == "MERCAPROMO" or isinstance(row["De"], str)):
             produtos_q = (
                     df_canal[
                         df_canal["Quinzena"].astype(str) == str(quinzena)

@@ -949,7 +949,7 @@ if pagina == "Calendário":
     )
 else:
 
-    st.title("Árvore de Preços")
+    st.title("Árvore de Preços + Repasse")
 
     with open(
         "arvore_de_preços_e_repasse.html",

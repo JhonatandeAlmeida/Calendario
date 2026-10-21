@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image
 import os
 import base64
-
+import streamlit.components.v1 as components
 
 from io import BytesIO
 
@@ -292,6 +292,11 @@ st.set_page_config(
 )
 
 load_css()
+pagina = st.radio(
+    "Módulo",
+    ["Calendário", "Árvore de Preços"],
+    horizontal=True
+)
 
 # ==================================================
 # PRODUTOS
@@ -487,457 +492,474 @@ def mostrar_produtos(df_canal, canal, negocio):
                     unsafe_allow_html=True
                 )
                                 
+if pagina == "Calendário":
 
-# ==================================================
-# LEITURA DA PLANILHA
-# ==================================================
+    # ==================================================
+    # LEITURA DA PLANILHA
+    # ==================================================
 
-ARQUIVO = "data/calendario_promocional.xlsx"
+    ARQUIVO = "data/calendario_promocional.xlsx"
 
-@st.cache_data(ttl=30)
-def carregar_planilha():
+    @st.cache_data(ttl=30)
+    def carregar_planilha():
 
-    config_df = pd.read_excel(
-        ARQUIVO,
-        sheet_name="CONFIG"
-    )
+        config_df = pd.read_excel(
+            ARQUIVO,
+            sheet_name="CONFIG"
+        )
 
-    cal_df = pd.read_excel(
-        ARQUIVO,
-        sheet_name="CALENDARIO"
-    )
+        cal_df = pd.read_excel(
+            ARQUIVO,
+            sheet_name="CALENDARIO"
+        )
 
-    mec_df = pd.read_excel(
-        ARQUIVO,
-        sheet_name="MECANICA"
-    )
+        mec_df = pd.read_excel(
+            ARQUIVO,
+            sheet_name="MECANICA"
+        )
 
-    prod_df = pd.read_excel(
-        ARQUIVO,
-        sheet_name="PRODUTOS"
-    )
+        prod_df = pd.read_excel(
+            ARQUIVO,
+            sheet_name="PRODUTOS"
+        )
 
-    return (
-        config_df,
-        cal_df,
-        mec_df,
-        prod_df
-    )
+        return (
+            config_df,
+            cal_df,
+            mec_df,
+            prod_df
+        )
 
-try:
+    try:
 
-    config_df, cal_df, mec_df, prod_df = carregar_planilha()
+        config_df, cal_df, mec_df, prod_df = carregar_planilha()
 
-except Exception as e:
+    except Exception as e:
 
-    st.error(f"Erro ao abrir a planilha: {e}")
-    st.stop()
+        st.error(f"Erro ao abrir a planilha: {e}")
+        st.stop()
 
-# ==================================================
-# PADRONIZAÇÃO DAS IMAGENS
-# ==================================================
+    # ==================================================
+    # PADRONIZAÇÃO DAS IMAGENS
+    # ==================================================
 
-PASTA_ORIGINAL = "images/produtos"
-PASTA_PADRONIZADA = "images/produtos_padronizados"
+    PASTA_ORIGINAL = "images/produtos"
+    PASTA_PADRONIZADA = "images/produtos_padronizados"
 
-os.makedirs(
-    PASTA_PADRONIZADA,
-    exist_ok=True
-)
-
-for arquivo in os.listdir(PASTA_ORIGINAL):
-
-    origem = os.path.join(
-        PASTA_ORIGINAL,
-        arquivo
-    )
-
-    destino = os.path.join(
+    os.makedirs(
         PASTA_PADRONIZADA,
-        arquivo
+        exist_ok=True
     )
-    if os.path.exists(destino):
-        continue
+
+    for arquivo in os.listdir(PASTA_ORIGINAL):
+
+        origem = os.path.join(
+            PASTA_ORIGINAL,
+            arquivo
+        )
+
+        destino = os.path.join(
+            PASTA_PADRONIZADA,
+            arquivo
+        )
+        if os.path.exists(destino):
+            continue
+            
+        try:
+
+            imagem = padronizar_imagem(
+                origem
+            )
+
+            imagem.save(
+                destino,
+                "PNG"
+            )
+
+        except Exception:
+            pass
+
+    # ==================================================
+    # CONFIG
+    # ==================================================
+
+    config = dict(
+        zip(
+            config_df["Chave"],
+            config_df["Valor"]
+        )
+    )
+
+    titulo = config.get(
+        "Titulo",
+        "Calendário Promocional"
+    )
+
+    logo = config.get(
+        "Logo",
+        "logo.png"
+    )
+
+    ano = int(
+        config.get(
+            "AnoAtual",
+            2026
+        )
+    )
+
+    mes_padrao = config.get(
+        "MesAtual",
+        "Setembro"
+    )
+
+    regional_padrao = config.get(
+        "RegionalPadrao",
+        "AM"
+    )
+
+    # ==================================================
+    # FILTROS
+    # ==================================================
+
+
+    meses_mapa = {
+        "Janeiro": 1,
+        "Fevereiro": 2,
+        "Março": 3,
+        "Abril": 4,
+        "Maio": 5,
+        "Junho": 6,
+        "Julho": 7,
+        "Agosto": 8,
+        "Setembro": 9,
+        "Outubro": 10,
+        "Novembro": 11,
+        "Dezembro": 12
+    }
+
+    meses = sorted(
+        prod_df["Mes"]
+        .dropna()
+        .astype(str)
+        .unique(),
+        key=lambda x: meses_mapa.get(x, 99)
+    )
+
+
+    colf1, colf2, esp1, colf3, colf4,  esp2, colf5, colf6, esp3, colf7, colf8 = st.columns([0.4,2,0.4,0.4,2,0.4,0.4,2,0.4,0.4,2])
+
+    with colf1:
+        st.markdown(
+            "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          Mês</div>",
+            unsafe_allow_html=True
+        )
+    with colf2:
+        mes = st.selectbox(
+            "Mês",
+            meses,
+            label_visibility="collapsed",
+            index=meses.index(mes_padrao)
+            if mes_padrao in meses else 0
+        )
+
+    with colf3:
+        st.markdown(
+            "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          Tipo</div>",
+            unsafe_allow_html=True
+        )
+    with colf4:
+        negocios = sorted(
+            prod_df["Tipo"]
+            .dropna()
+            .astype(str)
+            .unique()
+        )
+        negocio = st.selectbox(
+            "Tipo",
+            negocios,
+            label_visibility="collapsed",
+        )
         
-    try:
+    with colf5:
+        st.markdown(
+            "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          UF</div>",
+            unsafe_allow_html=True
+        )
+    with colf6:
+        regionais = sorted(
+            prod_df.loc[
+                prod_df["Tipo"] == negocio,
+                "Regional"
+            ]
+            .dropna()
+            .astype(str)
+            .unique()
+        )
+        regional = st.selectbox(
+            "Regional",
+            regionais,
+            label_visibility="collapsed",
+            index=regionais.index(regional_padrao)
+            if regional_padrao in regionais else 0
+        )
+        
+    with colf7:
+        st.markdown(
+            "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>     Canal</div>",
+            unsafe_allow_html=True
+        )
+    with colf8:
+        
+        canais = sorted(
+            prod_df.loc[
+                (prod_df["Tipo"] == negocio)
+                &
+                (prod_df["Regional"] == regional),
+                "Canal"
+            ]
+            .dropna()
+            .astype(str)
+            .unique()
+        )
+        canal = st.radio(
+            "Canal",
+            canais,
+            label_visibility="collapsed",
+            horizontal=True
+        )
+    # ==================================================
+    # FILTROS DE DADOS
+    # ==================================================
 
-        imagem = padronizar_imagem(
-            origem
+    produtos = prod_df[
+        (prod_df["Tipo"].astype(str) == negocio)
+        &
+        (prod_df["Mes"].astype(str) == mes)
+        &
+        (prod_df["Regional"].astype(str) == regional)
+        &
+        (prod_df["Canal"].astype(str) == canal)
+    ]
+    mecanica_mes = mec_df[
+        (mec_df["SKU"].astype(str) == negocio)
+        &
+        (
+            mec_df["Mes"]
+            .astype(str)
+            .str.strip()
+            .str.upper()
+            ==
+            mes.strip().upper()
+        )
+    ]
+    # ==================================================
+    # CALENDÁRIO
+    # ==================================================
+
+    cal_df["Data"] = pd.to_datetime(
+        cal_df["Data"]
+    )
+
+    mes_numero = meses_mapa.get(
+        mes,
+        9
+    )
+
+    cal_mes = cal_df[
+        (cal_df["Data"].dt.month == mes_numero)
+        &
+        (cal_df["Data"].dt.year == ano)
+        &
+        (cal_df["SKU"].astype(str) == negocio)
+    ]
+
+    eventos = {}
+
+    for _, row in cal_mes.iterrows():
+
+        eventos[
+            row["Data"].day
+        ] = row["Tipo"]
+
+    # ==================================================
+    # CABEÇALHO
+    # ==================================================
+
+    col_title, col_logo = st.columns([8, 1])
+
+    with col_title:
+
+        st.markdown(
+            f"""
+            <div class="main-title">
+                {titulo} | {mes} {ano}
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
-        imagem.save(
-            destino,
-            "PNG"
+    with col_logo:
+
+        try:
+            st.image(
+                f"images/{logo}",
+                width=120
+            )
+        except:
+            pass
+
+    # ==================================================
+    # CALENDÁRIO E MECÂNICA
+    # ==================================================
+
+    col_esquerda, col_direita = st.columns([0.8, 2.2])
+
+    with col_esquerda:
+
+        st.markdown(
+            """
+            <div class="section-title">
+                Calendário
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
-    except Exception:
-        pass
+        gerar_calendario(
+            ano,
+            mes_numero,
+            eventos
+        )
 
-# ==================================================
-# CONFIG
-# ==================================================
+        st.markdown("<br>", unsafe_allow_html=True)
 
-config = dict(
-    zip(
-        config_df["Chave"],
-        config_df["Valor"]
-    )
-)
-
-titulo = config.get(
-    "Titulo",
-    "Calendário Promocional"
-)
-
-logo = config.get(
-    "Logo",
-    "logo.png"
-)
-
-ano = int(
-    config.get(
-        "AnoAtual",
-        2026
-    )
-)
-
-mes_padrao = config.get(
-    "MesAtual",
-    "Setembro"
-)
-
-regional_padrao = config.get(
-    "RegionalPadrao",
-    "AM"
-)
-
-# ==================================================
-# FILTROS
-# ==================================================
-
-
-meses_mapa = {
-    "Janeiro": 1,
-    "Fevereiro": 2,
-    "Março": 3,
-    "Abril": 4,
-    "Maio": 5,
-    "Junho": 6,
-    "Julho": 7,
-    "Agosto": 8,
-    "Setembro": 9,
-    "Outubro": 10,
-    "Novembro": 11,
-    "Dezembro": 12
-}
-
-meses = sorted(
-    prod_df["Mes"]
-    .dropna()
-    .astype(str)
-    .unique(),
-    key=lambda x: meses_mapa.get(x, 99)
-)
-
-
-colf1, colf2, esp1, colf3, colf4,  esp2, colf5, colf6, esp3, colf7, colf8 = st.columns([0.4,2,0.4,0.4,2,0.4,0.4,2,0.4,0.4,2])
-
-with colf1:
-    st.markdown(
-        "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          Mês</div>",
-        unsafe_allow_html=True
-    )
-with colf2:
-    mes = st.selectbox(
-        "Mês",
-        meses,
-        label_visibility="collapsed",
-        index=meses.index(mes_padrao)
-        if mes_padrao in meses else 0
-    )
-
-with colf3:
-    st.markdown(
-        "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          Tipo</div>",
-        unsafe_allow_html=True
-    )
-with colf4:
-    negocios = sorted(
-        prod_df["Tipo"]
-        .dropna()
-        .astype(str)
-        .unique()
-    )
-    negocio = st.selectbox(
-        "Tipo",
-        negocios,
-        label_visibility="collapsed",
-    )
-    
-with colf5:
-    st.markdown(
-        "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          UF</div>",
-        unsafe_allow_html=True
-    )
-with colf6:
-    regionais = sorted(
-        prod_df.loc[
-            prod_df["Tipo"] == negocio,
-            "Regional"
+        st.markdown(
+            """
+            <div class="section-title">
+                Mecânica
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        sell_in = mecanica_mes[
+            mecanica_mes["Tipo"]
+            .astype(str)
+            .str.upper()
+            == "SELL IN"
         ]
-        .dropna()
-        .astype(str)
-        .unique()
-    )
-    regional = st.selectbox(
-        "Regional",
-        regionais,
-        label_visibility="collapsed",
-        index=regionais.index(regional_padrao)
-        if regional_padrao in regionais else 0
-    )
-    
-with colf7:
-    st.markdown(
-        "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>     Canal</div>",
-        unsafe_allow_html=True
-    )
-with colf8:
-    
-    canais = sorted(
-        prod_df.loc[
-            (prod_df["Tipo"] == negocio)
-            &
-            (prod_df["Regional"] == regional),
-            "Canal"
+        
+        sell_out = mecanica_mes[
+            mecanica_mes["Tipo"]
+            .astype(str)
+            .str.upper()
+            == "SELL OUT"
         ]
-        .dropna()
-        .astype(str)
-        .unique()
-    )
-    canal = st.radio(
-        "Canal",
-        canais,
-        label_visibility="collapsed",
-        horizontal=True
-    )
-# ==================================================
-# FILTROS DE DADOS
-# ==================================================
 
-produtos = prod_df[
-    (prod_df["Tipo"].astype(str) == negocio)
-    &
-    (prod_df["Mes"].astype(str) == mes)
-    &
-    (prod_df["Regional"].astype(str) == regional)
-    &
-    (prod_df["Canal"].astype(str) == canal)
-]
-mecanica_mes = mec_df[
-    (mec_df["SKU"].astype(str) == negocio)
-    &
-    (
-        mec_df["Mes"]
-        .astype(str)
-        .str.strip()
-        .str.upper()
-        ==
-        mes.strip().upper()
-    )
-]
-# ==================================================
-# CALENDÁRIO
-# ==================================================
+        merca = mecanica_mes[
+            mecanica_mes["Tipo"]
+            .astype(str)
+            .str.upper()
+            == "MERCAPROMO"
+        ]
+        
+        html = "<div class='mecanica-box'>"
+        
+        if not sell_in.empty:
+        
+            html += """
+            <div class='mecanica-subtitle'>
+                SELL IN
+            </div>
+            <ul class='mecanica-lista'>
+            """
+        
+            for _, row in sell_in.iterrows():
+                html += f"<li>{row['Texto']}</li>"
+        
+            html += "</ul>"
+        
+        if not sell_out.empty:
+        
+            html += """
+            <div class='mecanica-subtitle'>
+                SELL OUT
+            </div>
+            <ul class='mecanica-lista'>
+            """
+        
+            for _, row in sell_out.iterrows():
+                html += f"<li>{row['Texto']}</li>"
+        
+            html += "</ul>"
 
-cal_df["Data"] = pd.to_datetime(
-    cal_df["Data"]
-)
+        if not merca.empty:
+        
+            html += """
+            <div class='mecanica-subtitle'>
+                MERCAPROMO
+            </div>
+            <ul class='mecanica-lista'>
+            """
+        
+            for _, row in merca.iterrows():
+                html += f"<li>{row['Texto']}</li>"
+        
+            html += "</ul>"
+        
+        html += "</div>"
 
-mes_numero = meses_mapa.get(
-    mes,
-    9
-)
-
-cal_mes = cal_df[
-    (cal_df["Data"].dt.month == mes_numero)
-    &
-    (cal_df["Data"].dt.year == ano)
-    &
-    (cal_df["SKU"].astype(str) == negocio)
-]
-
-eventos = {}
-
-for _, row in cal_mes.iterrows():
-
-    eventos[
-        row["Data"].day
-    ] = row["Tipo"]
-
-# ==================================================
-# CABEÇALHO
-# ==================================================
-
-col_title, col_logo = st.columns([8, 1])
-
-with col_title:
-
-    st.markdown(
-        f"""
-        <div class="main-title">
-            {titulo} | {mes} {ano}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-with col_logo:
-
-    try:
-        st.image(
-            f"images/{logo}",
-            width=120
+        st.markdown(
+            html,
+            unsafe_allow_html=True
         )
-    except:
-        pass
 
-# ==================================================
-# CALENDÁRIO E MECÂNICA
-# ==================================================
+    with col_direita:
 
-col_esquerda, col_direita = st.columns([0.8, 2.2])
+        if produtos.empty:
 
-with col_esquerda:
+            st.warning(
+                "Nenhum produto encontrado."
+            )
 
-    st.markdown(
-        """
-        <div class="section-title">
-            Calendário
-        </div>
-        """,
-        unsafe_allow_html=True
+        else:
+
+            mostrar_produtos(
+                produtos,
+                canal,
+                negocio
+            )
+
+    pdf_file = gerar_pdf(
+        titulo=titulo,
+        mes=mes,
+        ano=ano,
+        mecanica_mes=mecanica_mes,
+        produtos=produtos,
+        logo=logo,
+        canal=canal,
+        negocio=negocio,
+        regional=regional
     )
 
-    gerar_calendario(
-        ano,
-        mes_numero,
-        eventos
+    st.download_button(
+        "📄 Exportar PDF",
+        data=pdf_file,
+        file_name=f"Calendario_{canal}_{regional}_{mes}_{ano}.pdf",
+        mime="application/pdf"
     )
+else:
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.title("Árvore de Preços")
 
-    st.markdown(
-        """
-        <div class="section-title">
-            Mecânica
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    sell_in = mecanica_mes[
-        mecanica_mes["Tipo"]
-        .astype(str)
-        .str.upper()
-        == "SELL IN"
-    ]
-    
-    sell_out = mecanica_mes[
-        mecanica_mes["Tipo"]
-        .astype(str)
-        .str.upper()
-        == "SELL OUT"
-    ]
+    with open(
+        "/workspaces/codespaces-blank/Calendario/arvore_de_preços_e_repasse.html",
+        "r",
+        encoding="utf-8"
+    ) as f:
+        html = f.read()
 
-    merca = mecanica_mes[
-        mecanica_mes["Tipo"]
-        .astype(str)
-        .str.upper()
-        == "MERCAPROMO"
-    ]
-    
-    html = "<div class='mecanica-box'>"
-    
-    if not sell_in.empty:
-    
-        html += """
-        <div class='mecanica-subtitle'>
-            SELL IN
-        </div>
-        <ul class='mecanica-lista'>
-        """
-    
-        for _, row in sell_in.iterrows():
-            html += f"<li>{row['Texto']}</li>"
-    
-        html += "</ul>"
-    
-    if not sell_out.empty:
-    
-        html += """
-        <div class='mecanica-subtitle'>
-            SELL OUT
-        </div>
-        <ul class='mecanica-lista'>
-        """
-    
-        for _, row in sell_out.iterrows():
-            html += f"<li>{row['Texto']}</li>"
-    
-        html += "</ul>"
-
-    if not merca.empty:
-    
-        html += """
-        <div class='mecanica-subtitle'>
-            MERCAPROMO
-        </div>
-        <ul class='mecanica-lista'>
-        """
-    
-        for _, row in merca.iterrows():
-            html += f"<li>{row['Texto']}</li>"
-    
-        html += "</ul>"
-    
-    html += "</div>"
-
-    st.markdown(
+    components.html(
         html,
-        unsafe_allow_html=True
+        height=2500,
+        scrolling=True
     )
-
-with col_direita:
-
-    if produtos.empty:
-
-        st.warning(
-            "Nenhum produto encontrado."
-        )
-
-    else:
-
-        mostrar_produtos(
-            produtos,
-            canal,
-            negocio
-        )
-
-pdf_file = gerar_pdf(
-    titulo=titulo,
-    mes=mes,
-    ano=ano,
-    mecanica_mes=mecanica_mes,
-    produtos=produtos,
-    logo=logo,
-    canal=canal,
-    negocio=negocio,
-    regional=regional
-)
-
-st.download_button(
-    "📄 Exportar PDF",
-    data=pdf_file,
-    file_name=f"Calendario_{canal}_{regional}_{mes}_{ano}.pdf",
-    mime="application/pdf"
-)

@@ -952,7 +952,7 @@ else:
     st.title("Árvore de Preços")
 
     with open(
-        "/workspaces/codespaces-blank/Calendario/arvore_de_preços_e_repasse.html",
+        "/Calendario/arvore_de_preços_e_repasse.html",
         "r",
         encoding="utf-8"
     ) as f:

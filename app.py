@@ -294,7 +294,7 @@ st.set_page_config(
 load_css()
 pagina = st.radio(
     "Módulo",
-    ["Calendário", "Árvore de Preços"],
+    ["Calendário", "Árvore de Preços + Repasse"],
     horizontal=True
 )
 

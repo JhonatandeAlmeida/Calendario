@@ -295,7 +295,7 @@ st.set_page_config(
 
 load_css()
 
-colp1, colp2 = st.columns([1,1])
+colp1, colp2, espp1, espp2 = st.columns([0.25,0.5,0.5,0.25])
 
 with colp1:
     st.markdown(

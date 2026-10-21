@@ -291,12 +291,24 @@ st.set_page_config(
     layout="wide"
 )
 
+
+
 load_css()
-pagina = st.radio(
-    "Módulo",
-    ["Calendário", "Árvore de Preços + Repasse"],
-    horizontal=True
-)
+
+    colp1, colp2 = st.columns([0.4,2])
+
+    with colp1:
+        st.markdown(
+            "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          Módulo</div>",
+            unsafe_allow_html=True
+        )
+    with colp2:
+        pagina = st.radio(
+            "Módulo",
+            ["Calendário", "Árvore de Preços + Repasse"],
+            horizontal=True,
+            label_visibility="collapsed"
+        )
 
 # ==================================================
 # PRODUTOS

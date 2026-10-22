@@ -151,7 +151,7 @@ def moeda(series):
 # CARREGAMENTO DOS DADOS
 # ============================================================
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(ttl=30)
 def load_data():
 
     read_excel_parquets(

@@ -18,3 +18,11 @@ def read_excel_parquets(path: str, destino: str) -> None:
             p = pd.read_excel(path, sheet_name=sheet)
             p.replace("-", "0.0")
             p.to_parquet(f"{destino}/{sheet}.parquet")
+
+def get_excel_sheet_names(file_path):
+    sheets = []
+    with zipfile.ZipFile(file_path, "r") as zip_ref:
+        xml = zip_ref.read("xl/workbook.xml").decode("utf-8")
+    for s_tag in re.findall("<sheet [^>]*", xml):
+        sheets.append(re.search('name="[^"]*', s_tag).group(0)[6:])
+    return sheets

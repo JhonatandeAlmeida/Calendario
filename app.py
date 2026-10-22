@@ -305,7 +305,7 @@ with colp1:
 with colp2:
     pagina = st.radio(
         "Módulo",
-        ["Calendário", "Árvore de Preços + Repasse"],
+        ["Calendário", "Árvore de Preços + Repasse Cerv", "Repasse NAB"],
         horizontal=True,
         label_visibility="collapsed"
     )
@@ -960,7 +960,7 @@ if pagina == "Calendário":
         file_name=f"Calendario_{canal}_{regional}_{mes}_{ano}.pdf",
         mime="application/pdf"
     )
-else:
+elif:
 
     st.title("Árvore de Preços + Repasse")
 
@@ -976,3 +976,5 @@ else:
         height=2500,
         scrolling=True
     )
+else:
+    st.switch_page("Repasse.py")

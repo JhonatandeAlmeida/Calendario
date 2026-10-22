@@ -17,7 +17,7 @@ def mostrar_repasse():
     # CONFIGURAÇÕES
     # ============================================================
     
-    TITLE = "OUTUBRO/26"
+    TITLE = "NOVEMBRO/26 - VIG: 09/11"
     
     CANAL_CONFIG = {
         "BAR": {
@@ -151,7 +151,7 @@ def mostrar_repasse():
     # CARREGAMENTO DOS DADOS
     # ============================================================
     
-    @st.cache_data(ttl=30)
+    @st.cache_data(ttl=30, show_spinner=False)
     def load_data():
     
         read_excel_parquets(

@@ -58,7 +58,7 @@ CANAL_CONFIG = {
         "delta": "atacado-delta ttc",
         "pre_label": "Pré",
         "pos_label": "Pós",
-        "delta_label": "TTC",
+        "delta_label": "Delta",
     },
 }
 

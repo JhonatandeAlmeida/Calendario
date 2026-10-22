@@ -105,7 +105,7 @@ COMUM = [
 # UTILITÁRIOS
 # ============================================================
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=30)
 def convert_image(path):
 
     if not path:

@@ -960,7 +960,7 @@ if pagina == "Calendário":
         file_name=f"Calendario_{canal}_{regional}_{mes}_{ano}.pdf",
         mime="application/pdf"
     )
-elif:
+elif pagina ==  "Árvore de Preços + Repasse Cerv":
 
     st.title("Árvore de Preços + Repasse")
 

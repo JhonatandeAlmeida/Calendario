@@ -977,4 +977,4 @@ elif pagina ==  "Árvore de Preços + Repasse Cerv":
         scrolling=True
     )
 else:
-    st.switch_page("RepasseNAB.py")
+    st.switch_page("pages/RepasseNAB.py")

@@ -319,7 +319,7 @@ def mostrar_produtos(df_canal, canal, negocio, regional):
     st.markdown(
         f"""
         <div class="canal-title">
-            {canal}
+            {canal} - {regional}
         </div>
         """,
         unsafe_allow_html=True

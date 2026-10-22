@@ -4,7 +4,7 @@ from PIL import Image
 import os
 import base64
 import streamlit.components.v1 as components
-
+from repasseNAB import mostrar_repasse
 from io import BytesIO
 
 from reportlab.lib import colors

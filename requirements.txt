@@ -7,3 +7,6 @@ reportlab
 streamlit-javascript
 requests
 polars
+numpy
+pyarrow
+xlsx2csv

@@ -12,7 +12,7 @@ from pandas.api.types import is_numeric_dtype
 
 from functions import read_excel_parquets
 
-def mostrar_repasse()
+def mostrar_repasse():
     # ============================================================
     # CONFIGURAÇÕES
     # ============================================================

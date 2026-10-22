@@ -314,7 +314,7 @@ with colp2:
 # PRODUTOS
 # ==================================================
 
-def mostrar_produtos(df_canal, canal, negocio):
+def mostrar_produtos(df_canal, canal, negocio, regional):
 
     st.markdown(
         f"""
@@ -938,7 +938,8 @@ if pagina == "Calendário":
             mostrar_produtos(
                 produtos,
                 canal,
-                negocio
+                negocio,
+                regional
             )
 
     pdf_file = gerar_pdf(

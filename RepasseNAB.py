@@ -413,17 +413,6 @@ def mostrar_repasse():
     # ==================================================
     # CABEÇALHO
     # ==================================================
-    config = dict(
-        zip(
-            config_df["Chave"],
-            config_df["Valor"]
-        )
-    )
-    
-    logo = config.get(
-        "Logo",
-        "logo.png"
-    )
 
     col_title, col_logo = st.columns([8, 1])
 
@@ -442,7 +431,7 @@ def mostrar_repasse():
 
         try:
             st.image(
-                f"images/{logo}",
+                f"images/logo.png",
                 width=120
             )
         except:

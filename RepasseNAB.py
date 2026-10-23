@@ -9,6 +9,7 @@ import polars as pl
 import streamlit as st
 from PIL import Image
 from pandas.api.types import is_numeric_dtype
+from components.styles import load_css
 
 from functions import read_excel_parquets
 
@@ -388,6 +389,7 @@ def mostrar_repasse():
     # ============================================================
     # APP
     # ============================================================
+    load_css()
     
     st.set_page_config(
         page_title=f"PINC NAB - {TITLE}",

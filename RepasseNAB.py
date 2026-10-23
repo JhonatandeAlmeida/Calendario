@@ -414,6 +414,11 @@ def mostrar_repasse():
     # CABEÇALHO
     # ==================================================
 
+    logo = config.get(
+        "Logo",
+        "logo.png"
+    )
+
     col_title, col_logo = st.columns([8, 1])
 
     with col_title:

@@ -962,7 +962,29 @@ if pagina == "Calendário":
     )
 elif pagina ==  "Árvore de Preços + Repasse Cerv":
 
-    st.title("Árvore de Preços + Repasse")
+    #st.title("Árvore de Preços + Repasse")
+    col_title, col_logo = st.columns([8, 1])
+
+    with col_title:
+
+        st.markdown(
+            f"""
+            <div class="main-title">
+                Resumo Repasse - {TITLE}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col_logo:
+
+        try:
+            st.image(
+                f"images/logo.png",
+                width=120
+            )
+        except:
+            pass
 
     with open(
         "arvore_de_preços_e_repasse.html",

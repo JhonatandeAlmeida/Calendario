@@ -413,7 +413,13 @@ def mostrar_repasse():
     # ==================================================
     # CABEÇALHO
     # ==================================================
-
+    config = dict(
+        zip(
+            config_df["Chave"],
+            config_df["Valor"]
+        )
+    )
+    
     logo = config.get(
         "Logo",
         "logo.png"

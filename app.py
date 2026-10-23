@@ -970,7 +970,7 @@ elif pagina ==  "Árvore de Preços + Repasse Cerv":
         st.markdown(
             f"""
             <div class="main-title">
-                Resumo Repasse - {TITLE}
+                Resumo Repasse - {pagina}
             </div>
             """,
             unsafe_allow_html=True

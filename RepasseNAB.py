@@ -409,7 +409,33 @@ def mostrar_repasse():
         unsafe_allow_html=True,
     )
     
-    st.header(f"Resumo Repasse - {TITLE}")
+    #st.header(f"Resumo Repasse - {TITLE}")
+    # ==================================================
+    # CABEÇALHO
+    # ==================================================
+
+    col_title, col_logo = st.columns([8, 1])
+
+    with col_title:
+
+        st.markdown(
+            f"""
+            <div class="main-title">
+                Resumo Repasse - {TITLE}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col_logo:
+
+        try:
+            st.image(
+                f"images/{logo}",
+                width=120
+            )
+        except:
+            pass
     
     repasse = load_data()
     

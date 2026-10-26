@@ -303,9 +303,9 @@ with colp1:
         unsafe_allow_html=True
     )
 with colp2:
-    pagina = st.radio(
+    = st.radio(
         "Módulo",
-        ["Calendário","Calendário Mercapromo" "Árvore de Preços + Repasse Cerv", "Repasse NAB"],
+        ["Calendário", "Calendário Mercapromo", "Árvore de Preços + Repasse Cerv", "Repasse NAB"],
         horizontal=True,
         label_visibility="collapsed"
     )
@@ -963,7 +963,9 @@ if pagina == "Calendário":
 
 elif pagina == "Calendário Mercapromo":
 
+
     st.title("Calendário Mercapromo")
+
 
     with open(
         "calendario_mercapromo.html",
@@ -971,6 +973,7 @@ elif pagina == "Calendário Mercapromo":
         encoding="utf-8"
     ) as f:
         html = f.read()
+
 
     components.html(
         html,

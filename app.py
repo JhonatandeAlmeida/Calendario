@@ -305,7 +305,7 @@ with colp1:
 with colp2:
     pagina = st.radio(
         "Módulo",
-        ["Calendário", "Árvore de Preços + Repasse Cerv", "Repasse NAB"],
+        ["Calendário","Calendário Mercapromo" "Árvore de Preços + Repasse Cerv", "Repasse NAB"],
         horizontal=True,
         label_visibility="collapsed"
     )
@@ -959,6 +959,23 @@ if pagina == "Calendário":
         data=pdf_file,
         file_name=f"Calendario_{canal}_{regional}_{mes}_{ano}.pdf",
         mime="application/pdf"
+    )
+
+elif pagina == "Calendário Mercapromo":
+
+    st.title("Calendário Mercapromo")
+
+    with open(
+        "calendario_mercapromo.html",
+        "r",
+        encoding="utf-8"
+    ) as f:
+        html = f.read()
+
+    components.html(
+        html,
+        height=2500,
+        scrolling=True
     )
 elif pagina ==  "Árvore de Preços + Repasse Cerv":
 

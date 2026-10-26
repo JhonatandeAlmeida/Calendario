@@ -303,12 +303,18 @@ with colp1:
         unsafe_allow_html=True
     )
 with colp2:
-    = st.radio(
+    pagina = st.radio(
         "Módulo",
-        ["Calendário", "Calendário Mercapromo", "Árvore de Preços + Repasse Cerv", "Repasse NAB"],
+        [
+            "Calendário",
+            "Calendário Mercapromo",
+            "Árvore de Preços + Repasse Cerv",
+            "Repasse NAB"
+        ],
         horizontal=True,
         label_visibility="collapsed"
     )
+
 
 # ==================================================
 # PRODUTOS

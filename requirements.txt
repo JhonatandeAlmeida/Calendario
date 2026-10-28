@@ -10,3 +10,5 @@ polars
 numpy
 pyarrow
 xlsx2csv
+msal
+requests

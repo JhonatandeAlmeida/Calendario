@@ -22,6 +22,31 @@ from reportlab.lib.styles import getSampleStyleSheet
 from components.calendar import gerar_calendario
 from components.styles import load_css
 
+import msal
+
+
+CLIENT_ID = "2609a149-fd2a-409a-a4b6-700c940a1f74"
+TENANT_ID = "cef04b19-7776-4a94-b89b-375c77a8f936"
+
+QUERY_PARAMS = st.query_params
+
+if "code" not in QUERY_PARAMS:
+
+    login_url = (
+        f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/authorize"
+        f"?client_id={CLIENT_ID}"
+        f"&response_type=code"
+        f"&redirect_uri=https://calendariogeoco.streamlit.app/"
+        f"&scope=openid profile email User.Read"
+    )
+
+    st.title("Calendário Promocional")
+    st.link_button("Entrar com Microsoft", login_url)
+    st.stop()
+
+st.success("Usuário autenticado")
+
+
 @st.cache_data(ttl=30)
 def imagem_para_base64(caminho):
     with open(caminho, "rb") as img:

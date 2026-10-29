@@ -325,30 +325,20 @@ espp1, colp1, espp2 = st.columns([2,8,1])
 
 with colp1:
 
-    segmented_control_verde(
+    segmented_control_verde()
 
-        st.markdown(
-            '<div class="modulo-menu">',
-            unsafe_allow_html=True
-        )
-        
-        pagina = st.segmented_control(
-            "",
-            options=[
-                "Calendário",
-                "Calendário Mercapromo",
-                "Árvore de Preços + Repasse Cerv",
-                "Repasse NAB"
-            ],
-            default="Calendário"
-        )
-        
-        st.markdown(
-            '</div>',
-            unsafe_allow_html=True
-        )
+    pagina = st.segmented_control(
+        "",
+        options=[
+            "Calendário",
+            "Calendário Mercapromo",
+            "Árvore de Preços + Repasse Cerv",
+            "Repasse NAB"
+        ],
+        default="Calendário"
     )
     
+
 
 # ==================================================
 # PRODUTOS

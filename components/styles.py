@@ -157,14 +157,14 @@ def segmented_control_verde():
 
     /* Hover */
     [data-testid="stButtonGroup"] button:hover {
-        border-color: #00843D !important;
+        border-color: #1065F0 !important;
     }
 
     /* Apenas o botão ativo */
     [data-testid="stButtonGroup"] button[aria-checked="true"] {
-        background: #00843D !important;
+        background: #1065F0 !important;
         color: white !important;
-        border-color: #00843D !important;
+        border-color: #1065F0 !important;
     }
 
     </style>

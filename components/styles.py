@@ -139,29 +139,36 @@ def load_css():
     font-weight:bold;
     }
 
+    </style>
+    """, unsafe_allow_html=True)
 
+def segmented_control_verde():
+    st.markdown("""
+    <style>
+
+    /* Apenas elementos dentro da classe modulo-menu */
     .modulo-menu [data-testid="stSegmentedControl"] button {
-    background-color: white;
-    border: 1px solid #d0d0d0;
-    border-radius: 25px;
-    color: #333;
-    font-weight: 600;
-    min-height: 42px;
-    transition: all .2s ease;
-    }
-    
-    .modulo-menu [data-testid="stSegmentedControl"] button:hover {
-    border-color: #00843D;
-    color: #00843D;
-    }
-    
-    .modulo-menu [data-testid="stSegmentedControl"] button[aria-pressed="true"] {
-    background: #00843D !important;
-    color: white !important;
-    border-color: #00843D !important;
-    box-shadow: 0 4px 8px rgba(0,132,61,.25);
+        background-color: white;
+        border: 1px solid #d0d0d0;
+        border-radius: 25px;
+        color: #333;
+        font-weight: 600;
+        min-height: 42px;
+        transition: all .2s ease;
     }
 
+    .modulo-menu [data-testid="stSegmentedControl"] button:hover {
+        border-color: #00843D;
+        color: #00843D;
+    }
+
+    .modulo-menu [data-testid="stSegmentedControl"] button[aria-pressed="true"] {
+        background: #00843D !important;
+        color: white !important;
+        border-color: #00843D !important;
+        box-shadow: 0 4px 8px rgba(0,132,61,.25);
+    }
 
     </style>
     """, unsafe_allow_html=True)
+

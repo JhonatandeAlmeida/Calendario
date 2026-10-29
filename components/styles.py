@@ -161,7 +161,7 @@ def segmented_control_verde():
     }
 
     /* Apenas o botão ativo */
-    [data-testid="stButtonGroup"] label[aria-checked="true"] {
+    [data-testid="stButtonGroup"] button[aria-checked="true"] {
         background: #00843D !important;
         color: white !important;
         border-color: #00843D !important;

@@ -326,6 +326,9 @@ espp1, colp1, espp2 = st.columns([2,8,1])
 with colp1:
     
     segmented_control_verde()
+
+    if "pagina" not in st.session_state:
+        st.session_state.pagina = "Calendário"
     
     pagina = st.segmented_control(
         "",
@@ -335,8 +338,12 @@ with colp1:
             "Árvore de Preços + Repasse Cerv",
             "Repasse NAB"
         ],
-        default="Calendário"
+        default=st.session_state.pagina,
+        key="pagina"
     )
+
+    if pagina is None:
+        st.rerun()
     
 
 

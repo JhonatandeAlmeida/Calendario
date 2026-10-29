@@ -146,40 +146,26 @@ def segmented_control_verde():
     st.markdown("""
     <style>
 
-    /* Opções */
-    [data-testid="stButtonGroup"] label {
+    /* Botões não selecionados */
+    [data-testid="stSegmentedControl"] button {
+        background: white !important;
+        color: #333333 !important;
         border: 1px solid #D9D9D9 !important;
         border-radius: 25px !important;
-        background: #FFFFFF !important;
-        padding: 0.35rem 1rem !important;
-        margin-right: 8px !important;
-        transition: all .2s ease !important;
-    }
-
-    /* Hover */
-    [data-testid="stButtonGroup"] label:hover {
-        border-color: #00843D !important;
-        transform: translateY(-1px);
-    }
-
-    /* Selecionado */
-    [data-testid="stButtonGroup"] label[data-selected="true"] {
-        background: #00843D !important;
-        border-color: #00843D !important;
-        box-shadow: 0 4px 8px rgba(0,132,61,.25) !important;
-    }
-
-    /* Texto selecionado */
-    [data-testid="stButtonGroup"] label[data-selected="true"] p {
-        color: white !important;
         font-weight: 600 !important;
     }
 
-    /* Texto normal */
-    [data-testid="stButtonGroup"] p {
-        font-weight: 500 !important;
+    /* Hover */
+    [data-testid="stSegmentedControl"] button:hover {
+        border-color: #00843D !important;
+    }
+
+    /* Apenas o botão ativo */
+    [data-testid="stSegmentedControl"] button[kind="segmented_control_active"] {
+        background: #00843D !important;
+        color: white !important;
+        border-color: #00843D !important;
     }
 
     </style>
     """, unsafe_allow_html=True)
-

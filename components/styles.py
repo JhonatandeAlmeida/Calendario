@@ -148,10 +148,13 @@ def segmented_control_verde():
 
     /* Botões não selecionados */
     [data-testid="stButtonGroup"] button {
+        min-height: 52px !important;
+        padding: 12px 24px !important;
         background: white !important;
         color: #1065F0 !important;
         border: 1px solid #D9D9D9 !important;
         border-radius: 25px !important;
+        font-size: 16px !important;
         font-weight: 600 !important;
     }
 
@@ -165,6 +168,15 @@ def segmented_control_verde():
         background: #1065F0 !important;
         color: white !important;
         border-color: #1065F0 !important;
+        box-shadow: 0 4px 10px rgba(0,132,61,.25);
+    }
+
+    [data-testid="stButtonGroup"] {
+        width: 100%;
+    }
+    
+    [data-testid="stButtonGroup"] > div {
+        justify-content: center;
     }
 
     </style>

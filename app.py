@@ -331,7 +331,7 @@ st.markdown("""
 }
 
 /* Botões */
-button {
+[data-testid="stButtonGroup"] button {
     background-color: white !important;
     border: 1px solid #D9D9D9 !important;
     border-radius: 25px !important;
@@ -343,13 +343,13 @@ button {
 }
 
 /* Hover */
-button:hover {
+[data-testid="stButtonGroup"] button:hover {
     border-color: #00843D !important;
     color: #00843D !important;
 }
 
 /* Selecionado */
-button[aria-pressed="true"] {
+[data-testid="stButtonGroup"] button[aria-pressed="true"] {
     background-color: #00843D !important;
     border-color: #00843D !important;
     color: white !important;

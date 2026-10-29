@@ -148,7 +148,7 @@ def segmented_control_verde():
     <style>
 
     /* Botões não selecionados */
-    [data-testid="stSegmentedControl"] button {
+    [data-testid="stButtonGroup"] button {
         background: white !important;
         color: #333333 !important;
         border: 1px solid #D9D9D9 !important;
@@ -157,12 +157,12 @@ def segmented_control_verde():
     }
 
     /* Hover */
-    [data-testid="stSegmentedControl"] button:hover {
+    [data-testid="stButtonGroup"] button:hover {
         border-color: #00843D !important;
     }
 
     /* Apenas o botão ativo */
-    [data-testid="stSegmentedControl"] button[kind="segmented_control_active"] {
+    [data-testid="stButtonGroup"] button[kind="segmented_control_active"] {
         background: #00843D !important;
         color: white !important;
         border-color: #00843D !important;

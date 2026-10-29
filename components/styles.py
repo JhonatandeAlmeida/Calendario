@@ -142,42 +142,30 @@ def load_css():
     </style>
     """, unsafe_allow_html=True)
 
-
 def segmented_control_verde():
+
     st.markdown("""
     <style>
 
-    /* Apenas o segmented control principal */
-    [data-testid="stSegmentedControl"] {
-        margin-top: 5px;
-        margin-bottom: 10px;
-    }
-
-    /* Botões */
+    /* Botões não selecionados */
     [data-testid="stSegmentedControl"] button {
-        background-color: #FFFFFF;
+        background: white !important;
+        color: #333333 !important;
         border: 1px solid #D9D9D9 !important;
         border-radius: 25px !important;
-        color: #333333 !important;
         font-weight: 600 !important;
-        min-height: 42px !important;
-        padding: 0.5rem 1rem !important;
-        transition: all 0.2s ease-in-out;
     }
 
     /* Hover */
     [data-testid="stSegmentedControl"] button:hover {
         border-color: #00843D !important;
-        color: #00843D !important;
-        transform: translateY(-1px);
     }
 
-    /* Selecionado */
-    [data-testid="stSegmentedControl"] button[aria-pressed="true"] {
+    /* Apenas o botão ativo */
+    [data-testid="stSegmentedControl"] button[kind="segmented_control_active"] {
         background: #00843D !important;
-        border-color: #00843D !important;
         color: white !important;
-        box-shadow: 0 4px 8px rgba(0,132,61,0.25);
+        border-color: #00843D !important;
     }
 
     </style>

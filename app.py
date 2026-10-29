@@ -6,6 +6,7 @@ import base64
 import streamlit.components.v1 as components
 from RepasseNAB import mostrar_repasse
 from io import BytesIO
+from components.styles import segmented_control_verde
 
 from reportlab.lib import colors
 from reportlab.lib.units import cm
@@ -324,27 +325,29 @@ espp1, colp1, espp2 = st.columns([2,8,1])
 
 with colp1:
 
-    
+    segmented_control_verde()
+
     st.markdown(
         '<div class="modulo-menu">',
         unsafe_allow_html=True
     )
-
+    
     pagina = st.segmented_control(
         "",
         options=[
             "Calendário",
-            "Calendário Mercapromo",
-            "Árvore de Preços + Repasse Cerv",
+            "Mercapromo",
+            "Árvore de Preços",
             "Repasse NAB"
         ],
         default="Calendário"
     )
+    
     st.markdown(
         '</div>',
         unsafe_allow_html=True
     )
-        
+    
 
 # ==================================================
 # PRODUTOS

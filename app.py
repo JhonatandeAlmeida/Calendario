@@ -320,7 +320,7 @@ st.set_page_config(
 
 load_css()
 
-espp1, colp1, espp2 = st.columns([1,1,1])
+espp1, colp1, espp2 = st.columns([1,8,1])
 
 with colp1:
 

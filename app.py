@@ -324,6 +324,11 @@ espp1, colp1, espp2 = st.columns([2,8,1])
 
 with colp1:
 
+    
+    st.markdown(
+        '<div class="modulo-menu">',
+        unsafe_allow_html=True
+
     pagina = st.segmented_control(
         "",
         options=[
@@ -334,7 +339,11 @@ with colp1:
         ],
         default="Calendário"
     )
-    
+    st.markdown(
+        '</div>',
+        unsafe_allow_html=True
+    )
+        
 
 # ==================================================
 # PRODUTOS

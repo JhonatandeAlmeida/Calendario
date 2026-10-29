@@ -45,7 +45,7 @@ if "code" not in QUERY_PARAMS:
     st.link_button("Entrar com Microsoft", login_url)
     st.stop()
 
-st.success("Usuário autenticado")
+#st.success("Usuário autenticado")
 
 
 @st.cache_data(ttl=30)

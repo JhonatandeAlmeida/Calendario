@@ -6,7 +6,7 @@ import base64
 import streamlit.components.v1 as components
 from RepasseNAB import mostrar_repasse
 from io import BytesIO
-
+from functions import baixar_arquivo_sharepoint
 from reportlab.lib import colors
 from reportlab.lib.units import cm
 from reportlab.platypus import (

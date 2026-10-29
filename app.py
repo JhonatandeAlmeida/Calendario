@@ -335,17 +335,6 @@ with colp1:
         default="Calendário"
     )
     
-st.markdown(
-    """
-    <style>
-        div.block-container {
-            padding-top: 2rem;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-    
 
 # ==================================================
 # PRODUTOS

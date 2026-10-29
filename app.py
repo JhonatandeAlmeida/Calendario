@@ -320,14 +320,9 @@ st.set_page_config(
 
 load_css()
 
-espp1, colp1, colp2, espp2 = st.columns([1,0.3,1,1])
+espp1, colp1, espp2 = st.columns([1,1,1])
 
 with colp1:
-    st.markdown(
-        "<div style='font-size:18px;font-weight:bold;margin-bottom:1px'>          Módulo</div>",
-        unsafe_allow_html=True
-    )
-with colp2:
 
     st.markdown("""
         <style>

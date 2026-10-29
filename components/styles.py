@@ -161,7 +161,7 @@ def segmented_control_verde():
     }
 
     /* Apenas o botão ativo */
-    [data-testid="stButtonGroup"] button[kind="segmented_control_active"] {
+    [data-testid="stButtonGroup"] label[data-selected="true"] {
         background: #00843D !important;
         color: white !important;
         border-color: #00843D !important;

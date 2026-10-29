@@ -142,31 +142,42 @@ def load_css():
     </style>
     """, unsafe_allow_html=True)
 
+
 def segmented_control_verde():
     st.markdown("""
     <style>
 
-    /* Apenas elementos dentro da classe modulo-menu */
-    .modulo-menu{
-        background-color: white;
-        border: 1px solid #d0d0d0;
-        border-radius: 25px;
-        color: #333;
-        font-weight: 600;
-        min-height: 42px;
-        transition: all .2s ease;
+    /* Apenas o segmented control principal */
+    [data-testid="stSegmentedControl"] {
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 
-    .modulo-menu button:hover {
-        border-color: #00843D;
-        color: #00843D;
+    /* Botões */
+    [data-testid="stSegmentedControl"] button {
+        background-color: #FFFFFF;
+        border: 1px solid #D9D9D9 !important;
+        border-radius: 25px !important;
+        color: #333333 !important;
+        font-weight: 600 !important;
+        min-height: 42px !important;
+        padding: 0.5rem 1rem !important;
+        transition: all 0.2s ease-in-out;
     }
 
-    .modulo-menu button[aria-pressed="true"] {
-        background: #00843D !important;
-        color: white !important;
+    /* Hover */
+    [data-testid="stSegmentedControl"] button:hover {
         border-color: #00843D !important;
-        box-shadow: 0 4px 8px rgba(0,132,61,.25);
+        color: #00843D !important;
+        transform: translateY(-1px);
+    }
+
+    /* Selecionado */
+    [data-testid="stSegmentedControl"] button[aria-pressed="true"] {
+        background: #00843D !important;
+        border-color: #00843D !important;
+        color: white !important;
+        box-shadow: 0 4px 8px rgba(0,132,61,0.25);
     }
 
     </style>

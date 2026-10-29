@@ -323,10 +323,10 @@ load_css()
 
 espp1, colp1, espp2 = st.columns([2,8,1])
 
+segmented_control_verde()
+
 with colp1:
-
-    segmented_control_verde()
-
+    
     pagina = st.segmented_control(
         "",
         options=[

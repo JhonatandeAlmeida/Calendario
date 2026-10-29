@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def load_css():
 
     st.markdown("""
@@ -183,5 +182,4 @@ def segmented_control_verde():
 
     </style>
     """, unsafe_allow_html=True)
-``
 

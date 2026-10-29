@@ -326,12 +326,12 @@ st.markdown("""
 <style>
 
 /* Segmented Control */
-[data-testid="stSegmentedControl"] {
+{
     margin-top: 5px;
 }
 
 /* Botões */
-[data-testid="stSegmentedControl"] button {
+button {
     background-color: white !important;
     border: 1px solid #D9D9D9 !important;
     border-radius: 25px !important;
@@ -343,13 +343,13 @@ st.markdown("""
 }
 
 /* Hover */
-[data-testid="stSegmentedControl"] button:hover {
+button:hover {
     border-color: #00843D !important;
     color: #00843D !important;
 }
 
 /* Selecionado */
-[data-testid="stSegmentedControl"] button[aria-pressed="true"] {
+button[aria-pressed="true"] {
     background-color: #00843D !important;
     border-color: #00843D !important;
     color: white !important;

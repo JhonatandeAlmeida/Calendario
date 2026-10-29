@@ -148,6 +148,7 @@ def segmented_control_verde():
 
     /* Botões não selecionados */
     [data-testid="stButtonGroup"] button {
+        font-size:40px;
         background: white !important;
         color: #333333 !important;
         border: 1px solid #D9D9D9 !important;

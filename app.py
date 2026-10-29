@@ -336,8 +336,8 @@ with colp1:
         "",
         options=[
             "Calendário",
-            "Mercapromo",
-            "Árvore de Preços",
+            "Calendário Mercapromo",
+            "Árvore de Preços + Repasse Cerv",
             "Repasse NAB"
         ],
         default="Calendário"
@@ -347,6 +347,7 @@ with colp1:
         '</div>',
         unsafe_allow_html=True
     )
+
     
 
 # ==================================================

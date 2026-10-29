@@ -147,7 +147,7 @@ def segmented_control_verde():
     <style>
 
     /* Apenas elementos dentro da classe modulo-menu */
-    .modulo-menu [data-testid="stSegmentedControl"] button {
+    .modulo-menu{
         background-color: white;
         border: 1px solid #d0d0d0;
         border-radius: 25px;
@@ -157,12 +157,12 @@ def segmented_control_verde():
         transition: all .2s ease;
     }
 
-    .modulo-menu [data-testid="stSegmentedControl"] button:hover {
+    .modulo-menu button:hover {
         border-color: #00843D;
         color: #00843D;
     }
 
-    .modulo-menu [data-testid="stSegmentedControl"] button[aria-pressed="true"] {
+    .modulo-menu button[aria-pressed="true"] {
         background: #00843D !important;
         color: white !important;
         border-color: #00843D !important;

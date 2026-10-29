@@ -42,7 +42,7 @@ def get_access_token():
     url = (
         f"https://login.microsoftonline.com/"
         f"{st.secrets['TENANT_ID']}"
-        f"/oauth2/v2.0/token"
+        "/oauth2/v2.0/token"
     )
 
     payload = {
@@ -54,7 +54,8 @@ def get_access_token():
 
     response = requests.post(
         url,
-        data=payload
+        data=payload,
+        timeout=30
     )
 
     response.raise_for_status()
@@ -78,7 +79,8 @@ def get_site_id():
 
     response = requests.get(
         url,
-        headers=headers
+        headers=headers,
+        timeout=30
     )
 
     response.raise_for_status()
@@ -97,15 +99,16 @@ def baixar_arquivo_sharepoint(caminho_arquivo):
 
     site_id = get_site_id()
 
-    url = (
+    metadata_url = (
         f"https://graph.microsoft.com/v1.0/"
         f"sites/{site_id}"
         f"/drive/root:/{caminho_arquivo}"
     )
 
     response = requests.get(
-        url,
-        headers=headers
+        metadata_url,
+        headers=headers,
+        timeout=60
     )
 
     response.raise_for_status()
@@ -117,11 +120,10 @@ def baixar_arquivo_sharepoint(caminho_arquivo):
     ]
 
     arquivo = requests.get(
-        download_url
+        download_url,
+        timeout=120
     )
 
     arquivo.raise_for_status()
 
-    return BytesIO(
-        arquivo.content
-    )
+    return BytesIO(arquivo.content)

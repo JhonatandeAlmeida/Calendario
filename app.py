@@ -321,6 +321,19 @@ st.set_page_config(
 
 load_css()
 
+st.markdown("""
+<style>
+button {
+    background:red !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.segmented_control(
+    "",
+    ["A", "B", "C"]
+)
+
 espp1, colp1, espp2 = st.columns([2,8,1])
 
 with colp1:

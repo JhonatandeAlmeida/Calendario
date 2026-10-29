@@ -328,6 +328,7 @@ with colp1:
     st.markdown(
         '<div class="modulo-menu">',
         unsafe_allow_html=True
+    )
 
     pagina = st.segmented_control(
         "",

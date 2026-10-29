@@ -21,6 +21,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 from components.calendar import gerar_calendario
 from components.styles import load_css
+from components.styles import segmented_control_verde
 
 import msal
 
@@ -320,49 +321,11 @@ st.set_page_config(
 
 load_css()
 
-import streamlit as st
-
-st.markdown("""
-<style>
-
-/* Segmented Control */
-{
-    margin-top: 5px;
-}
-
-/* Botões */
-[data-testid="stButtonGroup"] button {
-    background-color: white !important;
-    border: 1px solid #D9D9D9 !important;
-    border-radius: 25px !important;
-    color: #333 !important;
-    font-weight: 600 !important;
-    min-height: 42px !important;
-    padding: 0.5rem 1rem !important;
-    transition: all .2s ease;
-}
-
-/* Hover */
-[data-testid="stButtonGroup"] button:hover {
-    border-color: #00843D !important;
-    color: #00843D !important;
-}
-
-/* Selecionado */
-[data-testid="stButtonGroup"] button[aria-pressed="true"] {
-    background-color: #00843D !important;
-    border-color: #00843D !important;
-    color: white !important;
-    box-shadow: 0 4px 8px rgba(0,132,61,.25);
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-
 espp1, colp1, espp2 = st.columns([2,8,1])
 
 with colp1:
+    
+    segmented_control_verde()
     
     pagina = st.segmented_control(
         "",

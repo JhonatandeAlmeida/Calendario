@@ -155,7 +155,7 @@ def segmented_control_verde():
         border: 1px solid #D9D9D9 !important;
         border-radius: 25px !important;
         font-size: 16px !important;
-        font-weight: 600 !important;
+        font-weight: bold !important;
     }
 
     /* Hover */

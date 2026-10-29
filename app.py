@@ -328,6 +328,39 @@ with colp1:
         unsafe_allow_html=True
     )
 with colp2:
+
+    st.markdown("""
+        <style>
+        
+        div[role="radiogroup"]{
+            display:flex;
+            gap:15px;
+        }
+        
+        div[role="radiogroup"] label{
+            background:#FFFFFF;
+            border:1px solid #E0E0E0;
+            border-radius:30px;
+            padding:10px 22px;
+            box-shadow:0 2px 4px rgba(0,0,0,.05);
+            transition:.3s;
+        }
+        
+        div[role="radiogroup"] label:hover{
+            border-color:#00843D;
+            transform:translateY(-2px);
+        }
+        
+        div[role="radiogroup"] label:has(input:checked){
+            background:#00843D;
+            border-color:#00843D;
+            color:white;
+            box-shadow:0 4px 8px rgba(0,132,61,.25);
+        }
+        
+        </style>
+        """, unsafe_allow_html=True)
+    
     pagina = st.radio(
         "Módulo",
         [

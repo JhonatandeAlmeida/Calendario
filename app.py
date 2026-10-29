@@ -6,7 +6,6 @@ import base64
 import streamlit.components.v1 as components
 from RepasseNAB import mostrar_repasse
 from io import BytesIO
-from components.styles import segmented_control_verde
 
 from reportlab.lib import colors
 from reportlab.lib.units import cm
@@ -321,9 +320,47 @@ st.set_page_config(
 
 load_css()
 
-espp1, colp1, espp2 = st.columns([2,8,1])
+import streamlit as st
 
-segmented_control_verde()
+st.markdown("""
+<style>
+
+/* Segmented Control */
+[data-testid="stSegmentedControl"] {
+    margin-top: 5px;
+}
+
+/* Botões */
+[data-testid="stSegmentedControl"] button {
+    background-color: white !important;
+    border: 1px solid #D9D9D9 !important;
+    border-radius: 25px !important;
+    color: #333 !important;
+    font-weight: 600 !important;
+    min-height: 42px !important;
+    padding: 0.5rem 1rem !important;
+    transition: all .2s ease;
+}
+
+/* Hover */
+[data-testid="stSegmentedControl"] button:hover {
+    border-color: #00843D !important;
+    color: #00843D !important;
+}
+
+/* Selecionado */
+[data-testid="stSegmentedControl"] button[aria-pressed="true"] {
+    background-color: #00843D !important;
+    border-color: #00843D !important;
+    color: white !important;
+    box-shadow: 0 4px 8px rgba(0,132,61,.25);
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+espp1, colp1, espp2 = st.columns([2,8,1])
 
 with colp1:
     

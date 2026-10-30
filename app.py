@@ -1057,7 +1057,7 @@ elif pagina ==  "Árvore de Preços + Repasse Cerv":
         scrolling=True
     )
 
-elif pagina ==  "Árvore de Preços + Repasse Cerv":
+elif pagina ==  "Score 100":
 
     #st.title("Árvore de Preços + Repasse")
     col_title, col_logo = st.columns([8, 1])

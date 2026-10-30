@@ -42,7 +42,7 @@ if "code" not in QUERY_PARAMS:
     )
 
     col_title, col_logo = st.columns([8, 1])
-    
+    load_css()
     with col_title:
     
         st.markdown(

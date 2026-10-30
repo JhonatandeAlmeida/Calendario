@@ -41,7 +41,7 @@ if "code" not in QUERY_PARAMS:
         f"&scope=openid profile email User.Read"
     )
 
-    st.title("Calendário Promocional")
+    st.title("HUB Comercial - Geo CO")
     st.link_button("Entrar com Microsoft", login_url)
     st.stop()
 

@@ -321,7 +321,7 @@ st.set_page_config(
 
 load_css()
 
-espp1, colp1, espp2 = st.columns([2,4,1])
+espp1, colp1, espp2 = st.columns([1,4,1])
 
 with colp1:
     
@@ -336,7 +336,8 @@ with colp1:
             "Calendário",
             "Calendário Mercapromo",
             "Árvore de Preços + Repasse Cerv",
-            "Repasse NAB"
+            "Repasse NAB",
+            "Score 100"
         ],
         default=st.session_state.pagina,
         key="pagina"
@@ -1055,5 +1056,45 @@ elif pagina ==  "Árvore de Preços + Repasse Cerv":
         height=2500,
         scrolling=True
     )
+
+elif pagina ==  "Árvore de Preços + Repasse Cerv":
+
+    #st.title("Árvore de Preços + Repasse")
+    col_title, col_logo = st.columns([8, 1])
+
+    with col_title:
+
+        st.markdown(
+            f"""
+            <div class="main-title">
+                 {pagina} - Geo CO
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col_logo:
+
+        try:
+            st.image(
+                f"images/logo.png",
+                width=120
+            )
+        except:
+            pass
+
+    with open(
+        "Score_100.html",
+        "r",
+        encoding="utf-8"
+    ) as f:
+        html = f.read()
+
+    components.html(
+        html,
+        height=2500,
+        scrolling=True
+    )
+
 else:
     mostrar_repasse()

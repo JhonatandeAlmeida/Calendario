@@ -41,7 +41,28 @@ if "code" not in QUERY_PARAMS:
         f"&scope=openid profile email User.Read"
     )
 
-    st.title("HUB Comercial - Geo CO")
+    col_title, col_logo = st.columns([8, 1])
+    
+    with col_title:
+    
+        st.markdown(
+            f"""
+            <div class="main-title">
+                HUB Comercial - Geo CO
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    
+    with col_logo:
+    
+        try:
+            st.image(
+                f"images/{logo}",
+                width=120
+            )
+        except:
+            pass
     st.link_button("Entrar com Microsoft", login_url)
     st.stop()
 

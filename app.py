@@ -312,7 +312,7 @@ def gerar_pdf(
 # ==================================================
 
 st.set_page_config(
-    page_title="Calendário Promocional",
+    page_title="HUB Comercial - Geo CO",
     page_icon="📅",
     layout="wide"
 )
